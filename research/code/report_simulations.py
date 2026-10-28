@@ -72,7 +72,7 @@ for cid in [9,102,100,101,10,11,12,105,103,104,13,14,15]:
     if cid==16:lab='SV + contamination'
     text+=line([lab,str(c['N']),str(c['n']),f"{c['effect']:.1f}"]+[f'{by[cid,m]["reject"]:.3f}' for m in ['Quantile','Median','Ordinary','Independent']])
 text+=table_end();(MAN/'table_raw.tex').write_text(text)
-text=table_start('Small-subject sensitivity analysis with $N=24$ and $\\delta=0$. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.','tab:small','llrr',['Design','Method','Reject','Cover'])
+text=table_start('Sensitivity analysis with $N=24$ subjects and $\\delta=0$. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.','tab:small','llrr',['Design','Method','Reject','Cover'])
 for cid,methods in [(106,['Cluster','Average','Independent']),(107,['Quantile','Median','Ordinary','Independent'])]:
     for m in methods:
         r=by[cid,m];text+=line(['Surface' if cid==106 else 'Volatility',m,f'{r["reject"]:.3f}',f'{r["cover"]:.3f}' if cid==106 else '--'])

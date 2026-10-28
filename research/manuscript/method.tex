@@ -37,7 +37,7 @@ At each $s\in\mathcal G$, define
  &=Q^{-1}\E\left[\sum_jw_{ij}x_{ij}Y_{ij}(s)\right].
  \end{split}
 \end{equation}
-Here $Q=\E(\sum_jw_{ij}x_{ij}x_{ij}\trans)$. The expectation first samples a subject and then samples a segment according to that subject's weights. Thus $\beta$ remains a well-defined linear projection if the conditional mean is not linear. Under a correct conditional mean model for this sampling distribution, a coefficient is the adjusted difference in mean log spectral response per unit covariate change. Its exponential is a ratio of conditional geometric means of the regularized spectral summaries.
+Here $Q=\E(\sum_jw_{ij}x_{ij}x_{ij}\trans)$. The expectation first samples a subject and then samples a segment according to that subject's weights. Thus $\beta$ remains a well-defined linear projection if the conditional mean is not linear. Under a correct conditional mean model for this sampling distribution, the contrast $(x_1-x_0)\trans\beta(s)$ is the difference in mean log spectral response between covariate vectors $x_0,x_1\in\R^p$. Its exponential is the ratio of the corresponding conditional geometric means of the regularized spectral summaries.
 
 The target in \eqref{eq:target} depends on the segment length, bandwidth, and regularization, although these indices are suppressed. It is suitable for comparing recordings processed in the same way. A latent target, obtained by replacing $Y_{ij}(s)$ by $L^0_{ij}(s)=\log\{S_{ij}(s)+\epsilon\}$, is denoted by $\beta^0(s)$. Section~\ref{sec:theory} gives conditions connecting the two targets. The finite-resolution target itself does not require consistent estimation of each segment's latent spectrum.
 
