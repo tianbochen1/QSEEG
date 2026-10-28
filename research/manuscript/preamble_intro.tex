@@ -1,0 +1,64 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{graphicx,booktabs,array,multirow}
+\usepackage{natbib}
+\usepackage{setspace,microtype}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{placeins,float}
+\onehalfspacing
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\clubpenalty=10000
+\widowpenalty=10000
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\trans}{^{\mathsf T}}
+\newcommand{\op}{o_{\mathrm p}}
+\newcommand{\Op}{O_{\mathrm p}}
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\diag}{\operatorname{diag}}
+\graphicspath{{frame/}}
+\title{Quantile spectral regression and simultaneous inference for repeated EEG recordings}
+\author{Tianbo Chen \quad Hanbing Zhu\thanks{Corresponding author. Email: \href{mailto:zhuhbecnu@163.com}{zhuhbecnu@163.com}.}\\[4pt]
+\small School of Big Data and Statistics, Anhui University, Hefei, China}
+\date{\small Short title: Quantile spectral inference for repeated EEG}
+\hypersetup{pdfauthor={Tianbo Chen and Hanbing Zhu},pdftitle={Quantile spectral regression and simultaneous inference for repeated EEG recordings}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Repeated electroencephalographic (EEG) recordings require methods that distinguish distribution-specific temporal dependence from correlation between recordings within a subject. We develop regression and simultaneous inference for rank-based quantile spectral summaries. Subject-normalized weights accommodate unequal recording counts, while a cluster sandwich covariance and a studentized wild bootstrap account for dependence across segments, frequencies, and quantile levels. Inference targets the regression of finite-window log spectral summaries at a common smoothing resolution. We establish asymptotic normality and bootstrap validity on a fixed frequency--quantile grid as the number of independent subjects grows, and give conditions for inference on a latent spectral regression. Applications to sleep EEG examine age associations and paired medication contrasts. Simulation studies and real-data applications show that the method improves uncertainty assessment for repeated recordings and identifies distribution-specific spectral associations.
+\end{abstract}
+\noindent\textbf{Keywords:} clustered data; copula spectrum; electroencephalography; repeated measurements; simultaneous confidence bands; wild bootstrap.
+
+\section{Introduction}\label{sec:intro}
+Sleep electroencephalography (EEG) is often recorded over several nights and divided into shorter intervals for analysis. Age, sleep stage, medication, and position within the night can be associated with different features of these recordings. Studies of slow waves and sleep spindles indicate that amplitude, frequency, and temporal organization need not change together \citep{Mourtazaev1995,Ohayon2004,Purcell2017}. This raises a specific question for age and medication studies: do spectral differences involve the amplitude-sensitive power spectrum, the temporal arrangement of low and high signal values, or both? A regression analysis should specify which aspect of the signal is being compared and distinguish repeated observations from the same person from observations on different people. Increasing the number of usable segments can improve measurement of an individual's EEG pattern, but does not create additional independent subjects.
+
+The power spectrum expresses autocovariance as a function of frequency and remains a standard description of oscillatory activity \citep{Brillinger1981,Priestley1981,Shumway2017}. Averaged periodograms and multitaper estimates reduce variability in spectral estimation \citep{Welch1967,Thomson1982}. These methods describe second-order structure. Two processes can have the same power spectrum while differing in the persistence of unusually low or high observations. This distinction matters when the timing of intermittent activity is of interest, or when changes in signal amplitude and changes in serial dependence have different scientific interpretations. A distribution-sensitive analysis can address such questions without replacing the ordinary spectrum as a measure of physical signal power.
+
+Spectral analysis across subjects has developed beyond separate estimates followed by comparisons of a few frequency bands. \citet{Diggle1997} studied replicated biomedical time series. Functional mixed effects models and wavelet methods allow spectral curves to vary across subjects and covariates \citep{Krafty2011,Freyermuth2010,Chau2016}. Models for evolving brain processes also distinguish variation within a recording from variation across trials \citep{Fiecas2016}. Conditional spectral methods have related multivariate spectra to clinical characteristics using Bayesian models \citep{Krafty2017,LiZ2021}, while cepstral regression offers a direct route to covariate-dependent log spectra \citep{LiDong2025}. Data-adaptive frequency bands have also been developed to retain between-subject spectral variation when a lower-dimensional summary is required \citep{Brubaker2026}.
+
+Related developments in functional data analysis provide regression formulations for curve-valued outcomes \citep{Ramsay2005,Morris2015}. EEG applications have required additional attention to recording region, covariate adjustment, and the geometry of spectral summaries. Examples include region-referenced functional models \citep{Scheffler2019}, multilevel general linear models for power spectra \citep{Quinn2024}, and Wasserstein summaries of normalized EEG spectral densities \citep{Liu2026}. These approaches address different representations of the response. In the present setting, the representation is indexed by both frequency and a quantile level of the EEG amplitude distribution, and each subject contributes several such surfaces.
+
+Quantile spectral methods provide a way to study serial dependence beyond autocovariance. Building on quantile regression \citep{Koenker1978}, \citet{Li2008,Li2012} developed Laplace and quantile periodograms. Subsequent work connected these constructions to time-dependent variance and to diagnostic measures for nonlinear dynamics \citep{Li2014,Li2021}. A related rank-based approach replaces observations by indicators of their position in the marginal distribution. \citet{Dette2015} formulated copula spectral density kernels, and \citet{Kley2016} developed the asymptotic analysis of quantile spectral processes. Because ranks are unchanged by strictly increasing transformations, these summaries describe serial ordering separately from the marginal amplitude scale.
+
+The quantile spectral literature includes locally stationary processes \citep{Birr2017}, dependence between series through quantile coherency \citep{Barunik2019}, and inference based on integrated copula spectra \citep{Goto2022}. Software for these methods is described by \citet{KleyJSS2016}. Closely related to our setting, \citet{LiZ2023} models copula spectral density matrices as smooth functions of frequency and a covariate through spline representations of their Cholesky components. Our focus is joint regression inference when each person contributes several correlated, finite EEG segments, potentially from multiple nights. We combine an established rank-based spectral representation with a subject-weighted regression target and simultaneous inference over a common frequency--quantile grid. The formulation accommodates unequal recording counts, segment-level covariates, and paired within-person contrasts. These features connect the spectral response to the sampling structure of repeated EEG studies.
+
+There are two separate sources of dependence. Observations within an EEG segment are serially correlated, and spectral summaries from the same person remain associated across segments and nights. Frequency smoothing reduces variability in segment-level spectral estimates but does not remove dependence between segments. Mixed effects models \citep{Laird1982} and marginal estimating equations \citep{Liang1986} provide established ways to account for repeated measurements. Sandwich covariance estimation permits inference without specifying the complete within-subject covariance \citep{White1980,Liang1986}. For a spectral surface, however, the covariance between frequencies and quantile levels is also relevant when reporting a confidence region or testing a global hypothesis. Subject-level resampling combines cluster inference \citep{Cameron2008} with the use of maxima in simultaneous inference \citep{Chernozhukov2013}.
+
+A further issue concerns the target of regression. A log spectrum estimated from a short segment is a random response whose expectation can differ from the log of the underlying spectrum. Dependence correction alone does not equate these quantities. We define the primary regression for the spectral summary at the window length, smoothing bandwidth, and quantile grid used in the study. This target supports comparisons made under a common measurement procedure and allows the within-window estimation error to enter the subject-level covariance. A separate result describes when this regression is asymptotically equivalent to one defined for a latent spectrum. Subject-normalized weights give each person a specified total contribution even when the number of available segments varies.
+
+We develop a weighted regression for rank-based log spectral surfaces, together with studentized subject-level bootstrap inference. The theory establishes large-sample validity for a fixed frequency--quantile grid and separates uncertainty in the measured response from bias relative to a latent spectral target. Simulations assess calibration and sensitivity to distribution-specific dependence, and the EEG analyses illustrate between-person associations and within-person comparisons. The applications use the age study and the paired medication study described by \citet{Mourtazaev1995,Kemp2000}, available through PhysioNet \citep{Goldberger2000,Pollard2026}.
+
+Section~\ref{sec:method} defines the spectral responses, regression target, and inference procedure. Section~\ref{sec:theory} develops the theoretical results. Sections~\ref{sec:simulation} and~\ref{sec:realdata} present the simulation studies and sleep EEG applications, and Section~\ref{sec:conclusion} concludes. Proofs and additional results are given in the appendix.

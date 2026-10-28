@@ -1,0 +1,33 @@
+\subsection{Additional simulation results}
+Table~\ref{tab:raw} reports the raw-series experiments with moderate and larger changes in persistence and longer segments. The ordinary spectrum and the median indicator spectrum are constant across exposure groups in the population volatility model. Rejection by the ordinary log-power regression in that setting concerns its finite-window response target, as explained above. Table~\ref{tab:small} assesses the procedure with fewer independent subjects, and Table~\ref{tab:studentization} compares the two bootstrap constructions.
+
+%% RAW_TABLE %%
+%% SMALL_TABLE %%
+%% STUDENTIZATION_TABLE %%
+\FloatBarrier
+
+\subsection{Additional EEG results}
+The 60-second windows contain 6,000 samples at the original sampling rate. Short-window sensitivity uses the first 3,000 samples from the same selected intervals. Average ranks are used for tied digital values. No amplitude rescaling is required for the rank spectra; ordinary log-power estimates use the calibrated EEG values. The smoothing operation is periodic on the full Fourier frequency interval before the positive-frequency analysis grid is extracted. Night-level weights in the age analysis are recalculated after channel-specific quality exclusions. The medication analysis averages the retained segment summaries within each night before taking paired differences.
+
+Figure~\ref{fig:fullsurfaces} shows the full stage-2 coefficient surfaces. The age contrasts are expressed per decade, and paired contrasts are temazepam minus placebo. The black boundaries enclose grid cells where the corresponding within-surface simultaneous interval excludes zero; they are drawn between adjacent grid cells for visualization. The direct Pz--Oz age contrasts in Figure~\ref{fig:agecontrasts} compare the nonmedian quantile responses with the median response using their joint subject-level covariance. Table~\ref{tab:eeg-sensitivity} and Figure~\ref{fig:resolution} summarize sensitivity to window length and bandwidth.
+
+%% EEG_SENSITIVITY_TABLE %%
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{full_surfaces.pdf}
+\caption{Full stage-2 quantile coefficient surfaces. Age coefficients are per decade, and paired coefficients are temazepam minus placebo. Each panel has its own color scale. Black contours delimit cells whose 95\% simultaneous intervals exclude zero.}\label{fig:fullsurfaces}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{age_quantile_contrasts.pdf}
+\caption{Differences between the stage-2 Pz--Oz age coefficients per decade at a nonmedian quantile and at the median. Shaded regions are slices of 95\% simultaneous bands constructed jointly over all eight nonmedian quantile contrasts and all 60 frequencies. These intervals account for correlation between the quantile-specific estimates.}\label{fig:agecontrasts}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{sensitivity_eeg.pdf}
+\caption{Sensitivity of stage-2 Fpz--Cz coefficients to window length and Gaussian bandwidth. The upper row shows age coefficients per decade and the lower row shows paired medication contrasts. These curves compare related finite-resolution targets; the main inferential bands are shown in the application figures.}\label{fig:resolution}
+\end{figure}
+
+\FloatBarrier

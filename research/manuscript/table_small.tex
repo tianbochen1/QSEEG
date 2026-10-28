@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering
+\caption{Small-subject sensitivity analysis with $N=24$ and $\delta=0$. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.}\label{tab:small}
+\small
+\begin{tabular}{llrr}
+\toprule
+Design & Method & Reject & Cover \\
+\midrule
+Surface & Cluster & 0.060 & 0.940 \\
+Surface & Average & 0.070 & 0.930 \\
+Surface & Independent & 0.626 & 0.374 \\
+Volatility & Quantile & 0.040 & -- \\
+Volatility & Median & 0.050 & -- \\
+Volatility & Ordinary & 0.043 & -- \\
+Volatility & Independent & 0.125 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

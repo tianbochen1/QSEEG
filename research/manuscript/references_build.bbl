@@ -1,0 +1,266 @@
+\begin{thebibliography}{}
+
+\bibitem[Barun{\'i}k and Kley, 2019]{Barunik2019}
+Barun{\'i}k, J. and Kley, T. (2019).
+\newblock Quantile coherency: A general measure for dependence between cyclical
+  economic variables.
+\newblock {\em The Econometrics Journal}, 22(2):131--152.
+
+\bibitem[Birr et~al., 2017]{Birr2017}
+Birr, S., Volgushev, S., Kley, T., Dette, H., and Hallin, M. (2017).
+\newblock Quantile spectral analysis for locally stationary time series.
+\newblock {\em Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 79(5):1619--1643.
+
+\bibitem[Brillinger, 1981]{Brillinger1981}
+Brillinger, D.~R. (1981).
+\newblock {\em Time Series: Data Analysis and Theory}.
+\newblock Holden-Day, San Francisco, expanded edition.
+
+\bibitem[Brubaker et~al., 2026]{Brubaker2026}
+Brubaker, C.~K., Manning, J.~P., Yentes, J.~M., and Bruce, S.~A. (2026).
+\newblock Frequency band analysis of multiple stationary time series.
+\newblock {\em Statistics in Medicine}, 45(3--5):e70412.
+
+\bibitem[Cameron et~al., 2008]{Cameron2008}
+Cameron, A.~C., Gelbach, J.~B., and Miller, D.~L. (2008).
+\newblock Bootstrap-based improvements for inference with clustered errors.
+\newblock {\em The Review of Economics and Statistics}, 90(3):414--427.
+
+\bibitem[Chau and von Sachs, 2016]{Chau2016}
+Chau, J. and von Sachs, R. (2016).
+\newblock Functional mixed effects wavelet estimation for spectra of replicated
+  time series.
+\newblock {\em Electronic Journal of Statistics}, 10(2):2461--2510.
+
+\bibitem[Chernozhukov et~al., 2013]{Chernozhukov2013}
+Chernozhukov, V., Chetverikov, D., and Kato, K. (2013).
+\newblock Gaussian approximations and multiplier bootstrap for maxima of sums
+  of high-dimensional random vectors.
+\newblock {\em The Annals of Statistics}, 41(6):2786--2819.
+
+\bibitem[Dette et~al., 2015]{Dette2015}
+Dette, H., Hallin, M., Kley, T., and Volgushev, S. (2015).
+\newblock Of copulas, quantiles, ranks and spectra: An {$L_1$}-approach to
+  spectral analysis.
+\newblock {\em Bernoulli}, 21(2):781--831.
+
+\bibitem[Diggle and Al~Wasel, 1997]{Diggle1997}
+Diggle, P.~J. and Al~Wasel, I. (1997).
+\newblock Spectral analysis of replicated biomedical time series.
+\newblock {\em Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}, 46(1):31--71.
+
+\bibitem[Fiecas and Ombao, 2016]{Fiecas2016}
+Fiecas, M. and Ombao, H. (2016).
+\newblock Modeling the evolution of dynamic brain processes during an
+  associative learning experiment.
+\newblock {\em Journal of the American Statistical Association},
+  111(516):1440--1453.
+
+\bibitem[Freyermuth et~al., 2010]{Freyermuth2010}
+Freyermuth, J.-M., Ombao, H., and von Sachs, R. (2010).
+\newblock Tree-structured wavelet estimation in a mixed effects model for
+  spectra of replicated time series.
+\newblock {\em Journal of the American Statistical Association},
+  105(490):634--646.
+
+\bibitem[Goldberger et~al., 2000]{Goldberger2000}
+Goldberger, A.~L., Amaral, L. A.~N., Glass, L., Hausdorff, J.~M., Ivanov,
+  P.~C., Mark, R.~G., Mietus, J.~E., Moody, G.~B., Peng, C.-K., and Stanley,
+  H.~E. (2000).
+\newblock {PhysioBank, PhysioToolkit, and PhysioNet}: Components of a new
+  research resource for complex physiologic signals.
+\newblock {\em Circulation}, 101(23):e215--e220.
+
+\bibitem[Goto et~al., 2022]{Goto2022}
+Goto, Y., Kley, T., Van~Hecke, R., Volgushev, S., Dette, H., and Hallin, M.
+  (2022).
+\newblock The integrated copula spectrum.
+\newblock {\em The Annals of Statistics}, 50(6):3563--3591.
+
+\bibitem[Kemp et~al., 2000]{Kemp2000}
+Kemp, B., Zwinderman, A.~H., Tuk, B., Kamphuisen, H. A.~C., and Obery{\'e}, J.
+  J.~L. (2000).
+\newblock Analysis of a sleep-dependent neuronal feedback loop: The slow-wave
+  microcontinuity of the {EEG}.
+\newblock {\em IEEE Transactions on Biomedical Engineering}, 47(9):1185--1194.
+
+\bibitem[Kley, 2016]{KleyJSS2016}
+Kley, T. (2016).
+\newblock Quantile-based spectral analysis in an object-oriented framework and
+  a reference implementation in {R}: The quantspec package.
+\newblock {\em Journal of Statistical Software}, 70(3):1--27.
+
+\bibitem[Kley et~al., 2016]{Kley2016}
+Kley, T., Volgushev, S., Dette, H., and Hallin, M. (2016).
+\newblock Quantile spectral processes: Asymptotic analysis and inference.
+\newblock {\em Bernoulli}, 22(3):1770--1807.
+
+\bibitem[Koenker and Bassett, 1978]{Koenker1978}
+Koenker, R. and Bassett, G. (1978).
+\newblock Regression quantiles.
+\newblock {\em Econometrica}, 46(1):33--50.
+
+\bibitem[Krafty et~al., 2011]{Krafty2011}
+Krafty, R.~T., Hall, M.~H., and Guo, W. (2011).
+\newblock Functional mixed effects spectral analysis.
+\newblock {\em Biometrika}, 98(3):583--598.
+
+\bibitem[Krafty et~al., 2017]{Krafty2017}
+Krafty, R.~T., Rosen, O., Stoffer, D.~S., Buysse, D.~J., and Hall, M.~H.
+  (2017).
+\newblock Conditional spectral analysis of replicated multiple time series with
+  application to nocturnal physiology.
+\newblock {\em Journal of the American Statistical Association},
+  112(520):1405--1416.
+
+\bibitem[Laird and Ware, 1982]{Laird1982}
+Laird, N.~M. and Ware, J.~H. (1982).
+\newblock Random-effects models for longitudinal data.
+\newblock {\em Biometrics}, 38(4):963--974.
+
+\bibitem[Li, 2008]{Li2008}
+Li, T.-H. (2008).
+\newblock Laplace periodogram for time series analysis.
+\newblock {\em Journal of the American Statistical Association},
+  103(482):757--768.
+
+\bibitem[Li, 2012]{Li2012}
+Li, T.-H. (2012).
+\newblock Quantile periodograms.
+\newblock {\em Journal of the American Statistical Association},
+  107(498):765--776.
+
+\bibitem[Li, 2014]{Li2014}
+Li, T.-H. (2014).
+\newblock Quantile periodogram and time-dependent variance.
+\newblock {\em Journal of Time Series Analysis}, 35(4):322--340.
+
+\bibitem[Li, 2021]{Li2021}
+Li, T.-H. (2021).
+\newblock Quantile-frequency analysis and spectral measures for diagnostic
+  checks of time series with nonlinear dynamics.
+\newblock {\em Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}, 70(2):270--290.
+
+\bibitem[Li, 2023]{LiZ2023}
+Li, Z. (2023).
+\newblock Robust conditional spectral analysis of replicated time series.
+\newblock {\em Statistics and Its Interface}, 16(1):81--96.
+
+\bibitem[Li et~al., 2021]{LiZ2021}
+Li, Z., Bruce, S.~A., Wutzke, C.~J., and Long, Y. (2021).
+\newblock Conditional adaptive {Bayesian} spectral analysis of replicated
+  multivariate time series.
+\newblock {\em Statistics in Medicine}, 40(8):1989--2005.
+
+\bibitem[Li and Dong, 2025]{LiDong2025}
+Li, Z. and Dong, Y. (2025).
+\newblock A cepstral model for efficient spectral analysis of
+  covariate-dependent time series.
+\newblock {\em Journal of Computational and Graphical Statistics},
+  34(4):1612--1624.
+
+\bibitem[Liang and Zeger, 1986]{Liang1986}
+Liang, K.-Y. and Zeger, S.~L. (1986).
+\newblock Longitudinal data analysis using generalized linear models.
+\newblock {\em Biometrika}, 73(1):13--22.
+
+\bibitem[Liu et~al., 2026]{Liu2026}
+Liu, P., Telesca, D., Dickinson, A., Jeste, S., and {\c S}ent{\"u}rk, D.
+  (2026).
+\newblock Wasserstein boxplots for the analysis of {EEG} power spectral
+  densities with applications to autism.
+\newblock {\em Statistics in Medicine}, 45(8--9):e70511.
+
+\bibitem[Mammen, 1993]{Mammen1993}
+Mammen, E. (1993).
+\newblock Bootstrap and wild bootstrap for high dimensional linear models.
+\newblock {\em The Annals of Statistics}, 21(1):255--285.
+
+\bibitem[Morris, 2015]{Morris2015}
+Morris, J.~S. (2015).
+\newblock Functional regression.
+\newblock {\em Annual Review of Statistics and Its Application}, 2:321--359.
+
+\bibitem[Morris et~al., 2019]{Morris2019}
+Morris, T.~P., White, I.~R., and Crowther, M.~J. (2019).
+\newblock Using simulation studies to evaluate statistical methods.
+\newblock {\em Statistics in Medicine}, 38(11):2074--2102.
+
+\bibitem[Mourtazaev et~al., 1995]{Mourtazaev1995}
+Mourtazaev, M.~S., Kemp, B., Zwinderman, A.~H., and Kamphuisen, H. A.~C.
+  (1995).
+\newblock Age and gender affect different characteristics of slow waves in the
+  sleep {EEG}.
+\newblock {\em Sleep}, 18(7):557--564.
+
+\bibitem[Ohayon et~al., 2004]{Ohayon2004}
+Ohayon, M.~M., Carskadon, M.~A., Guilleminault, C., and Vitiello, M.~V. (2004).
+\newblock Meta-analysis of quantitative sleep parameters from childhood to old
+  age in healthy individuals: Developing normative sleep values across the
+  human lifespan.
+\newblock {\em Sleep}, 27(7):1255--1273.
+
+\bibitem[Pollard et~al., 2026]{Pollard2026}
+Pollard, T., Moody, B.~E., Lehman, L.-w.~H., Gow, B.~J., Fernandes, C., Xie,
+  C., Johnson, A., Mark, R.~G., and Heldt, T. (2026).
+\newblock {PhysioNet} as a global platform for biomedical research.
+\newblock {\em Nature Health}, 1(8):792--795.
+
+\bibitem[Priestley, 1981]{Priestley1981}
+Priestley, M.~B. (1981).
+\newblock {\em Spectral Analysis and Time Series}.
+\newblock Academic Press, London.
+
+\bibitem[Purcell et~al., 2017]{Purcell2017}
+Purcell, S.~M., Manoach, D.~S., Demanuele, C., Cade, B.~E., Mariani, S., Cox,
+  R., Panagiotaropoulou, G., Saxena, R., Pan, J.~Q., Smoller, J.~W., Redline,
+  S., and Stickgold, R. (2017).
+\newblock Characterizing sleep spindles in 11,630 individuals from the
+  {National Sleep Research Resource}.
+\newblock {\em Nature Communications}, 8:15930.
+
+\bibitem[Quinn et~al., 2024]{Quinn2024}
+Quinn, A.~J., Atkinson, L.~Z., Gohil, C., Kohl, O., Pitt, J., Zich, C., Nobre,
+  A.~C., and Woolrich, M.~W. (2024).
+\newblock The {GLM}-spectrum: A multilevel framework for spectrum analysis with
+  covariate and confound modelling.
+\newblock {\em Imaging Neuroscience}, 2:1--26.
+
+\bibitem[Ramsay and Silverman, 2005]{Ramsay2005}
+Ramsay, J.~O. and Silverman, B.~W. (2005).
+\newblock {\em Functional Data Analysis}.
+\newblock Springer, New York, 2nd edition.
+
+\bibitem[Scheffler et~al., 2019]{Scheffler2019}
+Scheffler, A.~W., Telesca, D., Sugar, C.~A., Jeste, S., Dickinson, A.,
+  DiStefano, C., and {\c S}ent{\"u}rk, D. (2019).
+\newblock Covariate-adjusted region-referenced generalized functional linear
+  model for {EEG} data.
+\newblock {\em Statistics in Medicine}, 38(30):5587--5602.
+
+\bibitem[Shumway and Stoffer, 2017]{Shumway2017}
+Shumway, R.~H. and Stoffer, D.~S. (2017).
+\newblock {\em Time Series Analysis and Its Applications: With {R} Examples}.
+\newblock Springer, Cham, 4th edition.
+
+\bibitem[Thomson, 1982]{Thomson1982}
+Thomson, D.~J. (1982).
+\newblock Spectrum estimation and harmonic analysis.
+\newblock {\em Proceedings of the IEEE}, 70(9):1055--1096.
+
+\bibitem[Welch, 1967]{Welch1967}
+Welch, P.~D. (1967).
+\newblock The use of fast {Fourier} transform for the estimation of power
+  spectra: A method based on time averaging over short, modified periodograms.
+\newblock {\em IEEE Transactions on Audio and Electroacoustics}, 15(2):70--73.
+
+\bibitem[White, 1980]{White1980}
+White, H. (1980).
+\newblock A heteroskedasticity-consistent covariance matrix estimator and a
+  direct test for heteroskedasticity.
+\newblock {\em Econometrica}, 48(4):817--838.
+
+\end{thebibliography}

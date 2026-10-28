@@ -1,0 +1,59 @@
+\appendix
+\section*{Appendix}
+\renewcommand{\theequation}{A.\arabic{equation}}
+\setcounter{equation}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+\setcounter{table}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thesubsection}{A.\arabic{subsection}}
+\setcounter{subsection}{0}
+\subsection{Proofs}
+\subsubsection*{Proof of Proposition~\ref{prop:invariance}}
+A strictly increasing transformation preserves all order relations and all ties within a segment. It therefore preserves average ranks, the indicator sequences, their empirical variances, and the smoothed periodograms. Every regression and bootstrap quantity is a function of these responses, the covariates, and the weights, proving the first statement. For the second statement, duplicating a row $r$ times and assigning weight $w_{ij}/r$ to each copy preserves its total contribution to the weighted cross-products and weighted response products. Thus $Q_i$, $\widehat Q$, $\widehat\beta$, and $\widehat U_i$ are unchanged. Substitution into \eqref{eq:sandwich} with $c_N=1$ proves the covariance statement. \hfill$\square$
+
+\subsubsection*{Proof of Theorem~\ref{thm:clt}}
+The population normal equations give $\E U_i(s)=0$. By the law of large numbers, $\widehat Q\to Q$ in probability and $\widehat Q^{-1}\to Q^{-1}$. The sample normal equations yield the exact identity
+\begin{equation}\label{eq:proof-normal}
+ \widehat\beta(s)-\beta(s)
+ =\widehat Q^{-1}\frac1N\sum_{i=1}^N U_i(s).
+\end{equation}
+Apply the multivariate central limit theorem in \eqref{eq:proof-normal} to the finite vector obtained by stacking $U_i(s)$ over the grid. Condition (A2) ensures its finite second moment. Equation~\eqref{eq:linear} and the asserted Gaussian covariance follow by Slutsky's theorem. In particular, $\max_s\|\widehat\beta(s)-\beta(s)\|=\Op(N^{-1/2})$.
+
+For covariance consistency, $\widehat U_i(s)=U_i(s)-Q_i\{\widehat\beta(s)-\beta(s)\}$. Consequently,
+$N^{-1}\sum_i\|\widehat U_i(s)-U_i(s)\|^2\leq\|\widehat\beta(s)-\beta(s)\|^2N^{-1}\sum_i\|Q_i\|^2=\op(1)$, uniformly on the finite grid. The law of large numbers gives $N^{-1}\sum_i U_i(s)U_i(s')\trans\to\Omega(s,s')$. Cauchy--Schwarz bounds the cross-terms from replacing $U_i$ by $\widehat U_i$, and these terms are $\op(1)$. Since $M\geq N$ and $p$ is fixed, $c_N\to1$. Substitution into \eqref{eq:sandwich} completes the proof. \hfill$\square$
+
+\subsubsection*{Proof of Theorem~\ref{thm:bootstrap}}
+Conditionally on the data, the centered bootstrap coefficient in \eqref{eq:wild} is a sum of independent mean-zero vectors. Its covariance is $\widehat Q^{-1}\{N^{-1}\sum_i\widehat U_i(s)\widehat U_i(s')\trans\}\widehat Q^{-1}$ after multiplication by $\sqrt N$. This converges to $V(s,s')$ by Theorem~\ref{thm:clt}. The moment condition implies $\max_i\max_s\|U_i(s)\|/\sqrt N\to0$ and $\max_i\|Q_i\|/\sqrt N\to0$ in probability. Together with consistency of $\widehat\beta$, these bounds establish the conditional Lindeberg condition for the residual score stack. Hence the conditional joint limit of $\sqrt N(\widehat\beta^*-\widehat\beta)$ is the same Gaussian vector as the unconditional limit in Theorem~\ref{thm:clt}.
+
+It remains to check the bootstrap denominator. Write $\Delta^*(s)=\widehat\beta^*(s)-\widehat\beta(s)$, which is conditionally $\Op(N^{-1/2})$. Because $\xi_i^2=1$, the leading term in $N^{-1}\sum_i\widehat U_i^*(s)\widehat U_i^*(s')\trans$ is exactly $N^{-1}\sum_i\widehat U_i(s)\widehat U_i(s')\trans$. The average squared norm of the residual-score correction is bounded by $\max_s\|\Delta^*(s)\|^2N^{-1}\sum_i\|Q_i\|^2=\op(1)$ in conditional probability. Cauchy--Schwarz again controls the cross-terms. Thus the bootstrap covariance converges to $V$ in conditional probability, uniformly over the finite set of pairs $(s,s')$.
+
+Condition (A3) permits division by the standard errors. The continuous mapping theorem gives the same limiting maximum of absolute standardized Gaussian coordinates for $Z_N$ and $T_N^*$. This maximum has a continuous distribution when each tested coordinate has positive variance. Weak convergence to a continuous distribution implies uniform convergence of the distribution functions, giving \eqref{eq:bootstrap-valid}. Quantile consistency gives simultaneous coverage and null rejection probability. Under a fixed alternative, at least one numerator has a nonzero probability limit while its standard error is of order $N^{-1/2}$; the observed maximum diverges and the bootstrap critical value remains bounded in probability. \hfill$\square$
+
+\subsubsection*{Proof of Theorem~\ref{thm:transfer}}
+The two estimators have the same design matrix, so
+\begin{equation}\label{eq:oracle-difference}
+ \sqrt N\{\widehat\beta_N(s)-\widetilde\beta_N^0(s)\}
+ =\widehat Q_N^{-1}\left[
+ \sqrt N\E A_{i,N}(s)+\frac1{\sqrt N}
+ \sum_{i=1}^N\{A_{i,N}(s)-\E A_{i,N}(s)\}\right].
+\end{equation}
+The first term in \eqref{eq:oracle-difference} tends to zero by the first condition in \eqref{eq:transfer-conditions}. Independence across subjects and the second condition imply that the mean squared norm of the second term tends to zero. A union bound over the fixed grid makes both statements uniform. Since $\widehat Q_N^{-1}=\Op(1)$, the estimator difference is $\op(1)$ at the displayed scale.
+
+Let $\widehat U_{i,N}^{\mathrm{obs}}$ and $\widehat U_{i,N}^{\mathrm{or}}$ be residual cluster scores calculated from the observed and oracle responses. Their difference equals $A_{i,N}-Q_{i,N}(\widehat\beta_N-\widetilde\beta_N^0)$. Conditions \eqref{eq:transfer-conditions} imply $\E\max_s\|A_{i,N}(s)\|^2\to0$. Markov's inequality and the assumed bound on $N^{-1}\sum_i\|Q_{i,N}\|^2$ therefore show that the average squared score difference tends to zero in probability. Cauchy--Schwarz and oracle covariance consistency give equivalence of the sandwich covariances. For the bootstrap, use the same subject multipliers for the observed and oracle residual scores. Conditional on the data, the mean squared norm of their normalized multiplier-sum difference is bounded by the average squared score difference, which is $\op(1)$. Thus the observed and oracle bootstrap coefficient processes are asymptotically equivalent on the fixed grid. The covariance argument above also applies after bootstrap refitting. The uniform oracle moment bounds give the triangular-array central limit theorem and conditional Lindeberg condition, and the argument of Theorem~\ref{thm:bootstrap} yields the asserted coverage. \hfill$\square$
+
+\subsubsection*{Proof of Lemma~\ref{lem:logbias}}
+For $g(x)=\log(x+\epsilon)$ on $[0,\infty)$, $g'(x)=(x+\epsilon)^{-1}$, $g''(x)=-(x+\epsilon)^{-2}$, and $|g'''(x)|\leq2\epsilon^{-3}$. Taylor's formula around $S$ gives $g(S+d)-g(S)=d/(S+\epsilon)-d^2/\{2(S+\epsilon)^2\}+R$, with $|R|\leq|d|^3/(3\epsilon^3)$. Taking conditional expectations proves the result. \hfill$\square$
+
+\subsection{Simulation models and estimands}
+For the regression-surface experiment, generate independent standard normal variables $z_i,a_i^0,u_i,v_i$ and put $a_i=0.5z_i+a_i^0$. The segment covariate is $r_{ij}=0.6a_i+0.2z_i+0.5v_i+\nu_{ij}$, with independent standard normal $\nu_{ij}$. The regression weights are $1/m_i$. Let $g_1(f)=\exp[-\{(f-0.08)/0.035\}^2/2]$ and $g_2(f)=\exp[-\{(f-0.21)/0.045\}^2/2]$. The coefficient surfaces are $b_a(f,\tau)=\delta(2\tau-1)^2\{g_1(f)-0.6g_2(f)\}$, $b_z(f,\tau)=0.2\cos(2\pi f)$, and $b_r(f,\tau)=0.4\{1+0.5(\tau-0.5)\}g_2(f)$.
+
+Define six basis functions $B_{kl}(f,\tau)=6^{-1/2}\cos(\pi k\tau)\cos(2\pi lf/0.6)$, using pairs $(k,l)$ in $\{(0,0),(0,1),(1,1),(2,1),(0,2),(1,2)\}$. Enumerate these pairs in the displayed order and write their basis functions as $B_r$, $r=1,\ldots,6$. A subject random surface is $b_i=0.55\sum_{r=1}^6c_{ir}B_r$, where $c_{i1}=u_i$ and the remaining coefficients are independent standard normals. Let $\eta_{ij}=0.35\sum_{r=1}^6d_{ijr}B_r$, with independent standard normal $d_{ijr}$. Set $e_{i1}=\eta_{i1}$ and $e_{ij}=0.4e_{i,j-1}+\sqrt{0.84}\eta_{ij}$ for subsequent segments. The response is $Y_{ij}=a_i b_a+z_i b_z+r_{ij}b_r+b_i+e_{ij}$. The model is evaluated at five quantiles $\{0.1,0.3,0.5,0.7,0.9\}$ and 30 equally spaced frequencies from 0.015 to 0.30. The true exposure coefficient is $b_a$ on this grid.
+
+Balanced designs use a common segment count. In the informative-count experiment, $m_i=12$ when $a_i u_i>0$ and $m_i=4$ otherwise. Subject normalization preserves the stated projection coefficient because the weighted design--error cross-moment is zero. Weighting all segments equally instead weights the population by $m_i$ and changes the exposure projection. Its reported coverage is evaluated against the subject-weighted target, so a failure of coverage in that experiment can reflect an estimand difference as well as covariance estimation.
+
+For the time-series experiments, the exposure takes values $-1/2$ and $1/2$ in balanced groups. Independent standard normal $z_i$ and $u_i$ determine $\phi_i=0.08+0.84\operatorname{expit}(\delta a_i+0.4z_i+0.9u_i)$, where $\operatorname{expit}(v)=(1+e^{-v})^{-1}$. Conditional on $\phi_i$, the Gaussian autoregression is $X_{ijt}=\phi_iX_{ij,t-1}+\sqrt{1-\phi_i^2}\,\varepsilon_{ijt}$, initialized from its stationary $N(0,1)$ distribution. The stochastic-volatility process is $X_{ijt}=\exp\{(H_{ijt}-\sigma_H^2/2)/2\}\varepsilon_{ijt}$, where $\sigma_H=1.5$ and $H_{ijt}=\phi_i H_{ij,t-1}+\sigma_H\sqrt{1-\phi_i^2}\,\zeta_{ijt}$ is initialized from $N(0,\sigma_H^2)$. The innovations are independent standard normals. Segments are independent conditional on subject effects, and remain dependent marginally because they share those effects. Regression adjusts for $z_i$.
+
+In the volatility model, $\E(X_{ijt}\mid H_{ijt})=0$, $\E X_{ijt}^2=1$, and $\cov(X_{ijt},X_{ij,t-\ell})=0$ for every nonzero $\ell$. The population ordinary spectrum is therefore flat for every exposure value. Also, $\ind(X_{ijt}\leq0)=\ind(\varepsilon_{ijt}\leq0)$, so the population median indicator process is independent over time. Other quantile indicator processes can depend on volatility persistence. Equality of these population spectra does not imply equality of expected finite-window log periodograms, which can retain persistence-dependent transformation bias as described in Lemma~\ref{lem:logbias}.
+
+Ordinary spectral regression uses the log of a Gaussian-smoothed periodogram of the demeaned signal, retaining its amplitude scale. It uses the same frequencies and smoothing bandwidth as the quantile analysis. The median-only method uses $\tau=0.5$ and takes its maximum only over frequency. The independent-segment method uses the quantile responses but treats each segment as a separate cluster. These procedures have different response targets; comparisons under nonzero effects concern their sensitivity to the specified data-generating change.

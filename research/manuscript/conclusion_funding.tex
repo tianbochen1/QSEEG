@@ -1,0 +1,19 @@
+\section{Conclusion}\label{sec:conclusion}
+Regression of rank-based spectral summaries provides a distribution-sensitive description of repeated EEG recordings while keeping the subject as the unit of inference. Subject-normalized weights define the population being compared, and the cluster scores retain dependence across nights, segments, frequencies, and quantile levels. The studentized wild bootstrap uses this joint structure to form simultaneous confidence bands and global tests.
+
+The simulations show why the weighting scheme and the covariance calculation must be considered separately. Treating segments as independent can give narrow bands with poor coverage, while weighting all segments equally can change the target when recording counts are informative. Retaining segment-level covariates can improve precision relative to subject averaging. The volatility experiments identify a setting in which noncentral quantile spectra respond to changes that leave the population ordinary spectrum unchanged.
+
+The sleep EEG analyses distinguish between-person age associations from within-person medication contrasts under a common spectral measurement procedure. The age analyses identify variation across quantile levels in the parietal--occipital recordings, while the paired analysis localizes frequency-dependent differences between medication and placebo nights. Their interpretation is in terms of temporal dependence relative to each segment's amplitude distribution. Ordinary spectral regression retains information about the signal amplitude scale. Together, the two representations describe how sleep EEG differs in amplitude-sensitive power and in the ordering of signal values, with uncertainty assessed across the full analysis grid.
+
+The theoretical results establish inference for a fixed analysis grid as the number of subjects increases. A latent-spectrum interpretation requires the additional bias and variance conditions stated in the paper. Extensions to cross-channel copula spectra would incorporate phase and lead--lag dependence, while a locally stationary formulation could describe changes within longer recordings. Analyses with few subjects also warrant further study of small-sample calibration beyond the settings considered here.
+
+\section*{Funding}
+Chen's research was partially supported by the National Natural Science Foundation of China (No.\ 12301326), University Natural Science Research Project of Anhui Province (No.\ 2023AH050099), and Natural Science Foundation of Anhui Province (No.\ 2308085QA05).
+
+\section*{Conflict of interest}
+The authors declare no conflicts of interest.
+
+\section*{Data and code availability}
+The EEG recordings, sleep-stage annotations, and participant metadata used in this study are openly available in the Sleep-EDF Database Expanded at \url{https://doi.org/10.13026/C2X676}. Python code for spectral feature extraction, the simulation studies, regression and simultaneous inference, and reproduction of the tables and figures is available at \url{https://github.com/tianbochen1/QSEEG}. A downloadable bundle in the repository contains the derived spectral features and numerical results used in the analyses.
+
+\FloatBarrier

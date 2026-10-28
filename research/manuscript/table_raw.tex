@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{Global rejection probabilities for raw time-series experiments. All designs have six segments per subject. The full quantile method tests all five quantiles jointly; median and ordinary methods test frequency curves. The independent analysis uses the quantile surface.}\label{tab:raw}
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+Process & $N$ & $n$ & $\delta$ & Quantile & Median & Ordinary & Independent \\
+\midrule
+AR & 80 & 512 & 0.0 & 0.044 & 0.037 & 0.040 & 0.396 \\
+AR & 160 & 512 & 0.0 & 0.056 & 0.063 & 0.046 & 0.427 \\
+AR & 80 & 512 & 0.5 & 0.531 & 0.567 & 0.573 & 0.917 \\
+AR & 80 & 512 & 1.0 & 0.985 & 0.985 & 0.991 & 1.000 \\
+AR & 80 & 512 & 2.0 & 1.000 & 1.000 & 1.000 & 1.000 \\
+AR & 160 & 512 & 2.0 & 1.000 & 1.000 & 1.000 & 1.000 \\
+SV & 80 & 512 & 0.0 & 0.052 & 0.051 & 0.045 & 0.127 \\
+SV & 160 & 512 & 0.0 & 0.054 & 0.049 & 0.048 & 0.120 \\
+SV & 80 & 512 & 0.5 & 0.237 & 0.050 & 0.049 & 0.616 \\
+SV & 80 & 512 & 1.0 & 0.854 & 0.054 & 0.061 & 0.986 \\
+SV & 80 & 512 & 2.0 & 1.000 & 0.037 & 0.119 & 1.000 \\
+SV & 160 & 512 & 2.0 & 1.000 & 0.065 & 0.212 & 1.000 \\
+SV & 80 & 1024 & 2.0 & 1.000 & 0.043 & 0.079 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}

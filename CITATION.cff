@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite the accompanying manuscript: Quantile spectral regression and simultaneous inference for repeated EEG recordings, by Tianbo Chen and Hanbing Zhu."
+type: software
+title: "QSEEG: Quantile spectral regression and simultaneous inference for repeated EEG recordings"
+authors:
+  - family-names: Chen
+    given-names: Tianbo
+    affiliation: "School of Big Data and Statistics, Anhui University, Hefei, China"
+  - family-names: Zhu
+    given-names: Hanbing
+    affiliation: "School of Big Data and Statistics, Anhui University, Hefei, China"
+    email: "zhuhbecnu@163.com"
+keywords:
+  - electroencephalography
+  - quantile spectrum
+  - repeated measurements
+  - simultaneous inference
+  - wild bootstrap

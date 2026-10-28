@@ -1,0 +1,28 @@
+\subsection{Calibration and repeated-measurement efficiency}
+The subject-level procedure has simultaneous coverage close to the nominal level in the balanced surface experiments (Table~\ref{tab:surface}). Under the null, its coverage ranges from 0.942 to 0.951 across the four combinations of subject and segment counts. The independent-segment procedure has substantially lower coverage. With 80 subjects, increasing the number of segments from four to twelve reduces its coverage from 0.385 to 0.075. The corresponding subject-level coverages are 0.943 and 0.945. More correlated segments therefore make the independence approximation less appropriate, even as its reported bands become narrower (Figure~\ref{fig:calibration}).
+
+Subject averaging retains the correct sampling unit and has much better coverage than the independent-segment analysis. It is less precise in this design because averaging also reduces variation in the segment-level covariate. With 80 subjects and twelve segments under the null, the proposed method has an average band width of 0.289 and an RMSE of 0.046, compared with 0.404 and 0.064 for subject averaging. Under the alternative in the same design, rejection probabilities are 0.998 and 0.915. These differences concern a model with a varying segment-level covariate. When all covariates are constant within subject and equal segment weights are used, subject-averaged regression and the proposed estimator have the same point estimate.
+
+The informative-count experiment separates weighting from covariance correction (Table~\ref{tab:counts}). The subject-weighted procedure has coverage 0.954 for the stated population coefficient. Equal weighting of all segments, even with a subject-level sandwich covariance, has coverage 0.315 for that coefficient. Here the segment-weighted regression targets a different projection because the number of records depends on the exposure and a subject random effect. Correct clustering does not resolve this difference in estimands.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{simulation_calibration.pdf}
+\caption{Calibration and band width in the null regression-surface experiment. Error bars in panel (a) show 95\% Wilson intervals for the Monte Carlo coverage probabilities. The dashed line marks nominal simultaneous coverage. Cluster and Average retain the subject as the independent unit; Independent treats recording segments as independent.}\label{fig:calibration}
+\end{figure}
+
+\subsection{Sensitivity to ordinary and distribution-specific dependence}
+Under the raw-series null models with 80 subjects, the full quantile test has rejection probability 0.044 for the Gaussian autoregression and 0.052 for the volatility process. The corresponding independent-segment rejection probabilities are 0.396 and 0.127. The difference persists even though the segments are conditionally independent given their subject effects, because those effects are shared across recordings.
+
+The Gaussian autoregression changes dependence across the distribution. For an exposure effect $\delta=0.5$, the rejection probabilities are 0.531 for the full quantile procedure, 0.567 for the median-only analysis, and 0.573 for ordinary log-power regression. At larger effects the three subject-level procedures have similar sensitivity (Figure~\ref{fig:sensitivity}). 
+
+The volatility model gives a different comparison. At $\delta=1$, the full quantile procedure rejects with probability 0.854, compared with 0.054 for the median-only analysis and 0.061 for ordinary log-power regression. The noncentral quantile indicators retain changes in the persistence of volatility, whereas the population median indicator spectrum and ordinary spectrum remain flat. For stronger changes, ordinary finite-window log-power regression can also reject more often. This is consistent with a persistence-dependent expectation of the log spectral estimator and should not be interpreted as a change in the population second-order spectrum. The longer-window experiment and the full AR and SV rejection probabilities are reported in the appendix.
+
+A smaller-subject experiment and the Gaussian multiplier comparison are also given in the appendix. The studentized Rademacher wild bootstrap is better calibrated than the fixed-standard-error Gaussian multiplier procedure in these designs. The two procedures differ in both their multiplier distribution and their standard-error calculation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{simulation_sensitivity.pdf}
+\caption{Global rejection probabilities with 80 subjects and six segments of length 512. The horizontal axis is the exposure coefficient in the persistence model. At zero, the curves assess test calibration. Positive values assess sensitivity to the specified change. The methods test different spectral responses. Error bars show 95\% Wilson intervals for the Monte Carlo rejection probabilities.}\label{fig:sensitivity}
+\end{figure}
+\FloatBarrier

@@ -1,0 +1,86 @@
+\section{Method}\label{sec:method}
+\subsection{Repeated recordings and quantile spectra}
+Let $i=1,\ldots,N$ index independent subjects and let $j=1,\ldots,m_i$ index the available segments from subject $i$. Segment $j$ contains observations $X_{ijt}$, $t=1,\ldots,n$, and a covariate vector $x_{ij}\in\R^p$ that includes an intercept. Covariates may be constant within a subject, vary between nights, or vary between segments. The same segment length and spectral construction are used for all observations in a given analysis. Different stages or channels can be analyzed separately, with the subject retained as the independent sampling unit.
+
+For interpretation, suppose a segment is drawn from a stationary process with continuous marginal distribution $F_{ij}$. For $\tau\in(0,1)$, its diagonal copula autocovariance is $\gamma_{ij,\tau}(\ell)=\cov\{\ind(F_{ij}(X_{ij,t})\leq\tau),\ind(F_{ij}(X_{ij,t-\ell})\leq\tau)\}$. When these autocovariances are absolutely summable, define the normalized diagonal quantile spectrum by
+\begin{equation}\label{eq:spectrum}
+ S_{ij}(f,\tau)
+ =\frac{1}{\tau(1-\tau)}\sum_{\ell\in\mathbb Z}
+ \gamma_{ij,\tau}(\ell)e^{-2\pi\mathrm{i}f\ell},
+ \qquad -\tfrac12\leq f\leq\tfrac12.
+\end{equation}
+Here $f$ is measured in cycles per observation. At sampling rate $r$ Hz, physical frequency is $rf$. The spectrum in \eqref{eq:spectrum} is real and nonnegative, and its integral over the full frequency interval equals one. For independent observations it is identically one. Values at different $\tau$ describe the temporal dependence of events below different marginal quantiles. The diagonal spectrum does not contain the cross-quantile phase information available in the full copula spectral kernel \citep{Dette2015,Kley2016}.
+
+The empirical response uses within-segment ranks. Let $R_{ijt}$ denote the average rank of $X_{ijt}$ and set $I_{ijt}(\tau)=\ind\{R_{ijt}/(n+1)\leq\tau\}$. Write $\bar I_{ij}(\tau)=n^{-1}\sum_{t=1}^n I_{ijt}(\tau)$ and $v_{ij}(\tau)=\bar I_{ij}(\tau)\{1-\bar I_{ij}(\tau)\}$. The analysis uses a common quantile grid on which $v_{ij}(\tau)>0$ for every retained segment. At Fourier frequency $f_k=k/n$, the normalized rank periodogram and its smoothed version are
+\begin{equation}\label{eq:est-spectrum}
+ \begin{split}
+ P_{ij}(f_k,\tau)
+ &=\frac{1}{n v_{ij}(\tau)}
+ \left|\sum_{t=1}^n\{I_{ijt}(\tau)-\bar I_{ij}(\tau)\}
+ e^{-2\pi\mathrm{i}kt/n}\right|^2,\\
+ \widehat S_{ij,h}(f,\tau)
+ &=\sum_{k=0}^{n-1}a_{k,h}(f)P_{ij}(f_k,\tau).
+ \end{split}
+\end{equation}
+The smoothing weights are nonnegative and sum to one. We use a Gaussian kernel with bandwidth $h>0$ and periodic extension on the unit frequency interval, truncated at four bandwidths and renormalized, followed by linear interpolation to the analysis grid. This also specifies the treatment of frequencies near zero. Using \eqref{eq:est-spectrum}, the response is $Y_{ij}(s)=\log\{\widehat S_{ij,h}(s)+\epsilon\}$ for $s=(f,\tau)$, where $\epsilon>0$ is a fixed regularization constant. The analysis domain is a finite grid $\mathcal G=\{s_1,\ldots,s_D\}$. All simultaneous statements below concern this grid.
+
+This construction uses $\tau$ to define a time series of quantile events. The subsequent regression models the mean log spectral response, rather than a conditional quantile of a scalar outcome. Because thresholds are relative to each segment's marginal distribution, a tail quantile does not correspond to a common voltage threshold across subjects. Normalization removes the marginal variance of the indicator sequence, allowing dependence patterns at different quantiles to be compared on the same scale.
+
+\subsection{The regression target and subject weights}
+Choose nonnegative weights $w_{ij}$ with $\sum_j w_{ij}=1$. Equal segment weights within a subject give $w_{ij}=1/m_i$. When subject $i$ has $K_i$ nights with $m_{ik}$ eligible segments on night $k$, the choice $w_{ikj}=1/(K_i m_{ik})$ gives equal weight to the available nights and equal total weight to every subject. The weighting scheme is part of the estimand.
+
+At each $s\in\mathcal G$, define
+\begin{equation}\label{eq:target}
+ \begin{split}
+ \beta(s)&=\arg\min_{b\in\R^p}
+ \E\left[\sum_{j=1}^{m_i}w_{ij}\{Y_{ij}(s)-x_{ij}\trans b\}^2\right]\\
+ &=Q^{-1}\E\left[\sum_jw_{ij}x_{ij}Y_{ij}(s)\right].
+ \end{split}
+\end{equation}
+Here $Q=\E(\sum_jw_{ij}x_{ij}x_{ij}\trans)$. The expectation first samples a subject and then samples a segment according to that subject's weights. Thus $\beta$ remains a well-defined linear projection if the conditional mean is not linear. Under a correct conditional mean model for this sampling distribution, a coefficient is the adjusted difference in mean log spectral response per unit covariate change. Its exponential is a ratio of conditional geometric means of the regularized spectral summaries.
+
+The target in \eqref{eq:target} depends on the segment length, bandwidth, and regularization, although these indices are suppressed. It is suitable for comparing recordings processed in the same way. A latent target, obtained by replacing $Y_{ij}(s)$ by $L^0_{ij}(s)=\log\{S_{ij}(s)+\epsilon\}$, is denoted by $\beta^0(s)$. Section~\ref{sec:theory} gives conditions connecting the two targets. The finite-resolution target itself does not require consistent estimation of each segment's latent spectrum.
+
+Assume that the weighted sample design has full column rank. The estimator is weighted least squares across the repeated spectral responses,
+\begin{equation}\label{eq:estimator}
+ \widehat\beta(s)=\widehat Q^{-1}\frac1N
+ \sum_{i=1}^N\sum_jw_{ij}x_{ij}Y_{ij}(s),
+ \qquad
+ \widehat Q=\frac1N\sum_{i=1}^N\sum_jw_{ij}x_{ij}x_{ij}\trans.
+\end{equation}
+The common design matrix is used across the entire grid. Spectral smoothing is performed before regression, so the coefficient surface inherits the resolution of the response without an additional regression penalty. Subject weights control the relative contribution of recordings; they do not require the number of segments to be independent of subject characteristics. Equal weights per segment without normalization generally define a different population projection when segment counts are informative.
+
+Between-person and within-person questions require different designs. Age can be included directly in $x_{ij}$ because it varies across people. For a paired exposure, one can first average $Y$ within each condition and form a within-person difference, then regress that difference on an intercept and period-related covariates. Differencing removes subject effects that enter both conditions additively with the same coefficient. The same covariance and bootstrap constructions apply, with each paired difference treated as one subject-level observation, so that $m_i=1$ and $w_{i1}=1$.
+
+\subsection{Covariance estimation and simultaneous inference}
+Let $Q_i=\sum_jw_{ij}x_{ij}x_{ij}\trans$ and let $\widehat e_{ij}(s)=Y_{ij}(s)-x_{ij}\trans\widehat\beta(s)$. The cluster score is $\widehat U_i(s)=\sum_jw_{ij}x_{ij}\widehat e_{ij}(s)$. For $s,s'\in\mathcal G$, estimate the covariance of the limiting regression process by
+\begin{equation}\label{eq:sandwich}
+ \widehat V(s,s')=c_N\widehat Q^{-1}
+ \left\{\frac1N\sum_{i=1}^N\widehat U_i(s)\widehat U_i(s')\trans\right\}
+ \widehat Q^{-1},
+ \qquad c_N=\frac{N}{N-1}\frac{M-1}{M-p},
+\end{equation}
+where $N>1$, $M=\sum_i m_i$, and $M>p$. The factor $c_N$ tends to one. This estimator retains dependence across segments, nights, frequencies, and quantile levels within a subject. It also includes the variability introduced by estimating the segment spectra, because the observed spectral responses enter the residuals.
+
+For a fixed contrast vector $a\in\R^p$, write $\theta(s)=a\trans\beta(s)$, $\widehat\theta(s)=a\trans\widehat\beta(s)$, and $\widehat{\mathrm{se}}(s)=\{a\trans\widehat V(s,s)a/N\}^{1/2}$. A global null $H_0:\theta(s)=\theta_0(s)$ for every $s\in\mathcal G$ is assessed using $T_N=\max_{s\in\mathcal G}|\widehat\theta(s)-\theta_0(s)|/\widehat{\mathrm{se}}(s)$.
+
+We use a studentized wild bootstrap at the subject level \citep{Mammen1993,Cameron2008}. Draw independent Rademacher variables $\xi_i$, each equal to $-1$ or $1$ with equal probability, and use the same $\xi_i$ for every response belonging to subject $i$. Define
+\begin{equation}\label{eq:wild}
+ \begin{split}
+ Y^*_{ij}(s)&=x_{ij}\trans\widehat\beta(s)+\xi_i\widehat e_{ij}(s),\\
+ \widehat\beta^*(s)-\widehat\beta(s)
+ &=\widehat Q^{-1}\frac1N\sum_{i=1}^N\xi_i\widehat U_i(s),\\
+ \widehat U_i^*(s)
+ &=\xi_i\widehat U_i(s)-Q_i\{\widehat\beta^*(s)-\widehat\beta(s)\}.
+ \end{split}
+\end{equation}
+The last two identities allow the refitted regression and its residual cluster scores to be computed directly. Replace $\widehat U_i$ by $\widehat U_i^*$ in \eqref{eq:sandwich} to obtain $\widehat{\mathrm{se}}^*(s)$. The bootstrap statistic is $T_N^*=\max_{s\in\mathcal G}|a\trans\{\widehat\beta^*(s)-\widehat\beta(s)\}|/\widehat{\mathrm{se}}^*(s)$. Recomputing the denominator accounts for the change in residual covariance after refitting.
+
+For $0<\alpha<1$, if $q^*_{1-\alpha}$ is the conditional $(1-\alpha)$ quantile of $T_N^*$, simultaneous intervals are
+\begin{equation}\label{eq:band}
+ \widehat\theta(s)\ \pm\ q^*_{1-\alpha}\widehat{\mathrm{se}}(s),
+ \qquad s\in\mathcal G.
+\end{equation}
+The global test rejects when $T_N>q^*_{1-\alpha}$. With $B_{\mathrm{boot}}$ bootstrap draws, we estimate its tail probability by $\{1+\sum_{b=1}^{B_{\mathrm{boot}}}\ind(T_N^{*(b)}\geq T_N)\}/(B_{\mathrm{boot}}+1)$. The Monte Carlo test rejects when this probability is less than $\alpha$, and the confidence bands use the corresponding order statistic. The same draws preserve correlation across the entire frequency--quantile grid. If several channels, stages, or coefficient contrasts are to form one simultaneous family, they can be stacked before taking the maximum. A confidence band constructed for one surface does not automatically provide joint coverage for separately analyzed surfaces.
+
+A frequency-band mean is obtained by applying fixed nonnegative weights summing to one to the log spectral responses $Y_{ij}$ within that band before fitting. Alternatively, a tail-to-median contrast is obtained from $Y_{ij}(f,\tau)-Y_{ij}(f,1/2)$ and the corresponding difference of subject scores. This tests a difference between coefficient curves directly; separate rejection decisions at two quantile levels do not constitute such a test. The same principle applies to contrasts between channels or conditions.

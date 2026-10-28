@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Comparison of bootstrap constructions in the null surface experiment. Both use the same subject-weighted estimator and observed cluster sandwich standard errors. They differ in the multiplier distribution and whether standard errors are recomputed after refitting.}\label{tab:studentization}
+\small
+\begin{tabular}{rrlrrr}
+\toprule
+$N$ & $m$ & Bootstrap & Reject & Cover & Width \\
+\midrule
+80 & 4 & Gaussian, fixed standard error & 0.117 & 0.883 & 0.276 \\
+80 & 4 & Wild, recomputed standard error & 0.057 & 0.943 & 0.311 \\
+80 & 12 & Gaussian, fixed standard error & 0.107 & 0.893 & 0.256 \\
+80 & 12 & Wild, recomputed standard error & 0.055 & 0.945 & 0.289 \\
+160 & 4 & Gaussian, fixed standard error & 0.084 & 0.916 & 0.197 \\
+160 & 4 & Wild, recomputed standard error & 0.058 & 0.942 & 0.209 \\
+160 & 12 & Gaussian, fixed standard error & 0.079 & 0.921 & 0.183 \\
+160 & 12 & Wild, recomputed standard error & 0.049 & 0.951 & 0.195 \\
+\bottomrule
+\end{tabular}
+\end{table}
