@@ -38,7 +38,7 @@ fig.savefig(FIG/'age_associations.pdf');fig.savefig(ROOT/'qa'/'age_associations.
 fig,axs=plt.subplots(2,2,figsize=(7,4.7),layout='constrained')
 b,se,c=read('ST_2_0_main');b=b.reshape(9,60);se=se.reshape(9,60)
 for ax,qi,letter in zip(axs.ravel()[:3],[0,4,8],'abc'):
-    add(ax,b[qi],se[qi],c,'#165B83');ax.set_ylim(-.23,.56);ax.set_title(fr'({letter}) Quantile spectrum, $\tau = {t[qi]:.1f}$',loc='left')
+    add(ax,b[qi],se[qi],c,'#165B83');ax.set_ylim(-.23,.56);ax.set_title(fr'({letter}) Log quantile spectrum, $\tau = {t[qi]:.1f}$',loc='left')
 bo,so,co=read('ST_2_0_main','ordinary');add(axs[1,1],bo,so,co,'#A45B20');axs[1,1].set_title('(d) Ordinary log power',loc='left')
 for ax in axs.ravel():ax.set_xlabel('Frequency (Hz)');ax.set_ylabel('Adjusted paired contrast')
 fig.savefig(FIG/'paired_medication.pdf');fig.savefig(ROOT/'qa'/'paired_medication.png',dpi=180);plt.close(fig)

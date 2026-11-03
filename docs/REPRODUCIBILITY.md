@@ -6,9 +6,9 @@ Computational materials for *Quantile spectral regression and simultaneous infer
 
 **Corresponding author:** Hanbing Zhu, zhuhbecnu@163.com.
 
-**Repository:** https://github.com/tianbochen1/QSEEG
+**Version:** 1.0.2
 
-For a GitHub download, combine the [data bundle](https://github.com/tianbochen1/QSEEG/releases/tag/v1.0.1) with the current repository source as described in the [repository instructions](../README.md#download-and-reproduce). Merge the source files into the data bundle while retaining its other data and result files.
+**Repository:** https://github.com/tianbochen1/QSEEG
 
 ## Software
 
@@ -27,6 +27,7 @@ The archive includes the numerical simulation results, EEG regression results, a
 ```bash
 python research/code/report_simulations.py
 python research/code/report_eeg.py
+python research/code/paired_calibration.py --report-only
 python research/code/build_manuscript.py
 ```
 
@@ -53,12 +54,14 @@ python research/code/extra_simulation.py
 python research/code/small_sample_simulation.py --workers 3
 python research/code/gaussian_comparison.py
 python research/code/analyse_eeg.py
+python research/code/paired_calibration.py
 python research/code/report_simulations.py
 python research/code/report_eeg.py
+python research/code/paired_calibration.py --report-only
 python research/code/build_manuscript.py
 ```
 
-The supplied feature archives are sufficient for recalculating the EEG regressions. The Gaussian bootstrap comparison replaces its own output when run. The other simulation scripts resume incomplete calculations using configuration and replication identifiers. Random-number generators are initialized in the analysis scripts so the calculations can be reproduced. Minor floating-point differences can occur across numerical-library versions and platforms.
+The supplied feature archives are sufficient for recalculating the EEG regressions. The Gaussian bootstrap comparison and paired calibration replace their own outputs when run. The other simulation scripts resume incomplete calculations using configuration and replication identifiers. Random-number generators are initialized in the analysis scripts so the calculations can be reproduced. Minor floating-point differences can occur across numerical-library versions and platforms.
 
 To recalculate only the EEG analyses, move `research/results/eeg/` to a separate directory, then run `analyse_eeg.py` and `report_eeg.py` using the commands above.
 
@@ -93,7 +96,7 @@ The primary response is a finite-window, smoothed log rank spectrum on a common 
 
 The age analysis uses adjusted between-person associations. The medication analysis uses within-person temazepam-minus-placebo contrasts. Stage-2 Fpz-Cz is primary in both studies. REM and Pz-Oz analyses are secondary. Direct quantile heterogeneity tests compare all nonmedian quantile curves with the median curve, with Holm adjustment across the four stage-channel combinations within each study.
 
-There are 29 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 24 configurations, including null calibration with 40 subjects. The archive also contains null experiments with 20 and 24 subjects and a contamination alternative without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
+There are 29 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 24 configurations, including null calibration with 40 subjects. The archive also contains null experiments with 20 and 24 subjects and a contamination alternative without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. Four paired-design configurations assess null calibration with 22 subjects, Gaussian or standardized multivariate t5 errors, and common or age-dependent subject scales. Their covariates and residual grid covariance are based on the primary paired EEG analysis. Each uses 1,000 datasets and 399 bootstrap draws. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
 
 ## Files
 
@@ -104,6 +107,7 @@ There are 29 main and additional simulation configurations with 1,000 datasets p
 | `research/code/extra_simulation.py` | Additional effect sizes and small-subject designs |
 | `research/code/small_sample_simulation.py` | Null calibration with 20 and 40 subjects and Monte Carlo uncertainty summaries |
 | `research/code/gaussian_comparison.py` | Gaussian multiplier comparison |
+| `research/code/paired_calibration.py` | Paired-design null calibration and its table |
 | `research/code/read_annotations.py` | Sleep-stage annotation reader |
 | `research/code/acquire_eeg.py` | Recording acquisition, interval selection, and quality indicators |
 | `research/code/eeg_features.py` | Spectral feature extraction at the main and sensitivity resolutions |

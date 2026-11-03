@@ -69,8 +69,8 @@ def fit(X,Y,groups,coef=1,cluster=True,equal_subject=True,bootstrap=499,rng=None
     else:
         maxdist=np.max(np.abs(multipliers@(inf/se)),axis=1)
     # Match the strict Monte Carlo tail-probability test to its inversion.
-    critical_index=min(bootstrap-1,int(np.floor(.95*(bootstrap+1))))
-    crit=float(np.sort(maxdist)[critical_index])
+    critical_index=bootstrap+1-int(np.ceil(.05*(bootstrap+1)))
+    crit=float(np.sort(maxdist)[critical_index]) if critical_index<bootstrap else float('inf')
     observed=float(np.max(np.abs(bhat[coef]/se)))
     pvalue=float((1+np.sum(maxdist>=observed))/(bootstrap+1))
     return {'beta':bhat,'effect':bhat[coef],'se':se,'influence':inf,'critical':crit,'p':pvalue,'maxstat':observed,'N':N,'M':M,'maxdist':maxdist}

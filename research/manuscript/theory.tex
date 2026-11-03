@@ -9,7 +9,7 @@ For a fixed collection of retained segments, covariates, weights, and grid point
 The duplication property makes explicit why repeating an existing record does not increase the independent information in the analysis. The small-sample correction in \eqref{eq:sandwich} depends on $M$ and is not included in that exact invariance statement.
 
 \subsection{Regression asymptotics and bootstrap validity}
-Allow the segment counts $m_{i,N}$, segment length $n_N$, and bandwidth $h_N$ to vary with the number of subjects $N$. A subscript $N$ denotes the resulting row of the triangular array, including its finite-resolution target $\beta_N$. Write $U_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{Y_{ij,N}(s)-x_{ij,N}\trans\beta_N(s)\}$ and $\Omega_N(s,s')=\E\{U_{i,N}(s)U_{i,N}(s')\trans\}$. The cluster $\mathcal C_{i,N}$ includes all observations, covariates, counts, and weights from subject $i$.
+Allow the segment counts $m_{i,N}$, segment length $n_N$, and bandwidth $h_N$ to vary with the number of subjects $N$. A subscript $N$ denotes the resulting row of the triangular array, including its finite-resolution regression target $\beta_N$. Write $U_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{Y_{ij,N}(s)-x_{ij,N}\trans\beta_N(s)\}$ and $\Omega_N(s,s')=\E\{U_{i,N}(s)U_{i,N}(s')\trans\}$. The cluster $\mathcal C_{i,N}$ includes all observations, covariates, counts, and weights from subject $i$.
 
 \begin{enumerate}
 \item[(A1)] Within each row, the clusters $\mathcal C_{i,N}$ are independent and identically distributed. The number of covariates $p$, the grid $\mathcal G$, and $\epsilon>0$ are fixed.
@@ -28,7 +28,7 @@ Under (A1)--(A2), as $N\to\infty$, the regression estimator satisfies, jointly o
 Its $pD$-dimensional stacked limit is mean-zero Gaussian with covariance blocks $V(s,s')=Q^{-1}\Omega(s,s')Q^{-1}$. Moreover, $\max_{s,s'\in\mathcal G}\|\widehat V_N(s,s')-V(s,s')\|\to0$ in probability.
 \end{theorem}
 
-Additional segments can improve precision, while persistent subject heterogeneity can retain a nonzero variance at the $\sqrt N$ scale. For example, the grand mean of $N$ subjects with $m$ segments each and independent subject and segment effects has variance $\sigma_B^2/N+\sigma_E^2/(Nm)$, where $\sigma_B^2$ and $\sigma_E^2$ are their respective variances. If a contrast's variance at the $\sqrt N$ scale tends to zero, (A3) fails and a different normalization is needed. Theorem~\ref{thm:clt} also applies to subject-level paired differences.
+The expansion in \eqref{eq:linear} makes the subject the independent unit. Additional segments can improve precision, while persistent subject heterogeneity can retain a nonzero variance at the $\sqrt N$ scale. For example, the grand mean of $N$ subjects with $m$ segments each and independent subject and segment effects has variance $\sigma_B^2/N+\sigma_E^2/(Nm)$, where $\sigma_B^2$ and $\sigma_E^2$ are their respective variances. If a contrast's variance at the $\sqrt N$ scale tends to zero, (A3) fails and a different normalization is needed. Theorem~\ref{thm:clt} also applies to subject-level paired differences.
 
 \begin{theorem}\label{thm:bootstrap}
 Suppose (A1)--(A3) hold and the bootstrap is constructed as in \eqref{eq:wild}. Let
@@ -42,7 +42,7 @@ If $\Pp^*$ denotes probability conditional on the data, then, as $N\to\infty$,
 For every fixed $0<\alpha<1$, the simultaneous intervals in \eqref{eq:band} cover $a\trans\beta_N$ with probability tending to $1-\alpha$. The global test has limiting level $\alpha$ under $H_0$ and is consistent for alternatives satisfying $\liminf_N\max_{s\in\mathcal G}|a\trans\beta_N(s)-\theta_0(s)|>0$.
 \end{theorem}
 
-The result concerns the complete specified grid and permits a singular covariance matrix for the full surface, provided each tested contrast has positive limiting variance. The proofs are given in the appendix.
+The approximation in \eqref{eq:bootstrap-valid} concerns the complete specified grid and permits a singular covariance matrix for the full surface, provided each tested contrast has positive limiting variance. The coverage statement uses the ideal conditional bootstrap quantile; Monte Carlo intervals have the same limit when $B_{\mathrm{boot}}\to\infty$ as $N\to\infty$. The proofs are given in the appendix.
 
 \subsection{Relation to a latent spectral regression}
 Let $\beta_N^0$ be the projection defined with $L^0_{ij,N}$, using the same covariates and weights. Put $e^{\mathrm{sp}}_{ij,N}(s)=Y_{ij,N}(s)-L^0_{ij,N}(s)$ and $A_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}e^{\mathrm{sp}}_{ij,N}(s)$. The target difference is exactly
@@ -83,7 +83,7 @@ If $\sqrt N(b_N+v_N)\to0$, the conclusions of Theorem~\ref{thm:transfer} hold, w
 
 The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
 
-\begin{corollary}\label{cor:ratios}
+\begin{corollary}[Illustrative proportional growth]\label{cor:ratios}
 Retain the oracle, weighting, and conditional moment and covariance assumptions of Corollary~\ref{cor:growth}. Suppose the oracle contrast variances have positive limits, $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$, $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, and $h_N=n_N^{-1/3}$. Let $N,m_N,n_N\to\infty$, with $cm_N\leq m_{i,N}\leq Cm_N$ almost surely for constants $0<c\leq C<\infty$, and
 \[
  \frac{m_N}{N}\to\kappa\in[0,\infty],
@@ -93,4 +93,4 @@ Retain the oracle, weighting, and conditional moment and covariance assumptions 
 Here an infinite limit means that the corresponding ratio diverges. Then $\sqrt N(\widehat\beta_N-\widetilde\beta_N^0)=\op(1)$ jointly over $\mathcal G$. Thus $\sqrt N(\widehat\beta_N-\beta_N^0)$ has the centered Gaussian limit obtained by applying Theorem~\ref{thm:clt} to the oracle responses. The sandwich covariance consistently estimates the covariance of this limit, and the bootstrap intervals in \eqref{eq:band} have limiting coverage $1-\alpha$ for $a\trans\beta_N^0$.
 \end{corollary}
 
-For this bandwidth, the broader sufficient relation in Corollary~\ref{cor:growth} is $N=o(n_N^{4/3})$, and segment counts may remain bounded. The conditional spectral moment bounds require verification for the chosen time-series model and smoother; see \citet{Kley2016,Birr2017} for related quantile spectral theory.
+The spectral moment rates in Corollary~\ref{cor:ratios} are additional assumptions, not consequences of the smoothing construction alone. They require verification for the chosen conditional time-series model; \citet{Kley2016,Birr2017} give related quantile spectral theory. For this bandwidth, the broader sufficient relation is $N=o(n_N^{4/3})$, even with bounded segment counts. The ratio $m_N/N$ does not constrain the transfer: its stated limits describe admissible designs, while the inference rate also requires positive oracle contrast variances.

@@ -9,8 +9,8 @@ simulation=simulation.replace('\\subsection{Sensitivity to ordinary and distribu
 parts+=[simulation,read('realdata_design.tex'),read('table_eeg.tex'),read('realdata_results.tex'),read('conclusion_funding.tex')]
 parts+=['\\begingroup\n\\singlespacing\n\\small\n\\setlength{\\bibsep}{7pt}\n'+read('references_build.bbl')+'\n\\endgroup\n\\clearpage\n',read('appendix_proofs.tex')]
 app=read('appendix_additional.tex')
-for token,file in [('RAW_TABLE','table_raw.tex'),('SMALL_TABLE','table_small.tex'),('STUDENTIZATION_TABLE','table_studentization.tex'),('EEG_SENSITIVITY_TABLE','table_eeg_sensitivity.tex')]:app=app.replace('%% '+token+' %%',read(file))
-app=app.replace('[htbp]','[H]')
+for token,file in [('RAW_TABLE','table_raw.tex'),('SMALL_TABLE','table_small.tex'),('STUDENTIZATION_TABLE','table_studentization.tex'),('EEG_SENSITIVITY_TABLE','table_eeg_sensitivity.tex'),('PAIRED_CALIBRATION_TABLE','table_paired_calibration.tex')]:app=app.replace('%% '+token+' %%',read(file))
+app=app.replace('[htbp]','[!htbp]')
 parts+=[app,'\\end{document}\n']
 text='\n'.join(parts)
 assert not re.search(r'%% [A-Z_]+ %%',text)

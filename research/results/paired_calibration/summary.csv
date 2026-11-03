@@ -1,0 +1,5 @@
+distribution,heterogeneous,repetitions,rejection,coverage,width
+Gaussian,False,1000,0.053,0.947,0.1859855735881992
+Gaussian,True,1000,0.039,0.961,0.1788771805436056
+t5,False,1000,0.04,0.96,0.17683792606925233
+t5,True,1000,0.038,0.962,0.1693276972842764

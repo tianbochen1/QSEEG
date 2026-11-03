@@ -1,0 +1,6 @@
+{
+  "N": 22,
+  "repetitions": 1000,
+  "bootstrap": 399,
+  "age_scale_coefficient": 0.35
+}

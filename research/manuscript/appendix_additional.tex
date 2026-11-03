@@ -1,9 +1,17 @@
 \subsection{Additional simulation results}
-Table~\ref{tab:raw} reports the raw-series experiments with moderate and larger changes in persistence and longer segments. The ordinary spectrum and the median indicator spectrum are constant across exposure groups in the population volatility model. Rejection by the ordinary log-power regression in that setting concerns its finite-window response target, as explained above. Table~\ref{tab:small} assesses the procedure with fewer independent subjects, and Table~\ref{tab:studentization} compares the two bootstrap constructions.
+Table~\ref{tab:raw} reports the raw-series experiments with moderate and larger changes in persistence and longer segments. Table~\ref{tab:small} assesses the procedure with fewer independent subjects, and Table~\ref{tab:studentization} compares the two bootstrap constructions.
 
 %% RAW_TABLE %%
 %% SMALL_TABLE %%
 %% STUDENTIZATION_TABLE %%
+\FloatBarrier
+
+\subsection{Calibration for the paired EEG design}
+A further null experiment uses the 22-subject design matrix from the stage-2 Fpz--Cz paired analysis, including the intercept, night-order difference, and mean elapsed-time difference. Let $\widehat\beta$ and $\widehat e_i$ be the fitted coefficients and residual surfaces in that analysis. The simulated mean retains the two fitted nuisance terms and sets the intercept surface to zero. Independent subject error surfaces have covariance $\Sigma_{\mathrm{cal}}=(22-3)^{-1}\sum_i\widehat e_i\widehat e_i\trans$. We consider Gaussian errors and multivariate $t_5$ errors standardized to have this covariance. Both distributions are examined with a common scale and with age-dependent scales $\lambda_i\propto\exp(0.35z_i^{\mathrm{age}})$, normalized so that $22^{-1}\sum_i\lambda_i^2=1$, where $z_i^{\mathrm{age}}$ is age centered and scaled to empirical variance one. Scaling multiplies each error surface by $\lambda_i$. The grid and inference procedure match the paired analysis, with 1,000 replications and 399 bootstrap draws as in the other calibration experiments.
+
+Table~\ref{tab:paired-calibration} reports rejection probabilities from 0.038 to 0.053 and simultaneous coverage from 0.947 to 0.962. These results support calibration for this design under the specified error distributions, with somewhat conservative rejection in the heavy-tailed and heterogeneous settings.
+
+%% PAIRED_CALIBRATION_TABLE %%
 \FloatBarrier
 
 \subsection{Additional EEG results}
@@ -27,7 +35,7 @@ Figure~\ref{fig:fullsurfaces} shows the full stage-2 coefficient surfaces. The a
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{sensitivity_eeg.pdf}
-\caption{Sensitivity of stage-2 Fpz--Cz coefficients to window length and Gaussian bandwidth. The upper row shows age coefficients per decade and the lower row shows paired medication contrasts. These curves compare related finite-resolution targets; the main inferential bands are shown in the application figures.}\label{fig:resolution}
+\caption{Sensitivity of stage-2 Fpz--Cz coefficients to window length and Gaussian bandwidth. The upper row shows age coefficients per decade and the lower row shows paired medication contrasts. These curves compare related finite-resolution regression targets; the main inferential bands are shown in the application figures.}\label{fig:resolution}
 \end{figure}
 
 \FloatBarrier
