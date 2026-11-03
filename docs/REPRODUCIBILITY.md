@@ -8,6 +8,8 @@ Computational materials for *Quantile spectral regression and simultaneous infer
 
 **Repository:** https://github.com/tianbochen1/QSEEG
 
+For a GitHub download, combine the [data bundle](https://github.com/tianbochen1/QSEEG/releases/tag/v1.0.1) with the current repository source as described in the [repository instructions](../README.md#download-and-reproduce). Merge the source files into the data bundle while retaining its other data and result files.
+
 ## Software
 
 The analyses use Python 3.12 with NumPy, SciPy, pandas, Matplotlib, pyedflib, and xlrd. Install the dependencies from the top-level directory of this archive:
@@ -48,6 +50,7 @@ mv research/results research/reference_results
 mkdir research/results
 python research/code/simulate.py --reps 1000 --workers 5
 python research/code/extra_simulation.py
+python research/code/small_sample_simulation.py --workers 3
 python research/code/gaussian_comparison.py
 python research/code/analyse_eeg.py
 python research/code/report_simulations.py
@@ -90,7 +93,7 @@ The primary response is a finite-window, smoothed log rank spectrum on a common 
 
 The age analysis uses adjusted between-person associations. The medication analysis uses within-person temazepam-minus-placebo contrasts. Stage-2 Fpz-Cz is primary in both studies. REM and Pz-Oz analyses are secondary. Direct quantile heterogeneity tests compare all nonmedian quantile curves with the median curve, with Holm adjustment across the four stage-channel combinations within each study.
 
-There are 25 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 24 configurations. The archived contamination alternative is additional material without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals.
+There are 27 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 26 configurations, including null calibration with 20 and 24 subjects. The archived contamination alternative is additional material without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
 
 ## Files
 
@@ -99,6 +102,7 @@ There are 25 main and additional simulation configurations with 1,000 datasets p
 | `research/code/core.py` | Spectral responses, weighted regression, covariance estimation, and bootstrap inference |
 | `research/code/simulate.py` | Main regression-surface and raw time-series simulation designs |
 | `research/code/extra_simulation.py` | Additional effect sizes and small-subject designs |
+| `research/code/small_sample_simulation.py` | Null calibration with 20 subjects and Monte Carlo uncertainty summaries |
 | `research/code/gaussian_comparison.py` | Gaussian multiplier comparison |
 | `research/code/read_annotations.py` | Sleep-stage annotation reader |
 | `research/code/acquire_eeg.py` | Recording acquisition, interval selection, and quality indicators |

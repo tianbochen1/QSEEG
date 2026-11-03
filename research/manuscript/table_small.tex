@@ -1,18 +1,20 @@
 \begin{table}[htbp]
 \centering
-\caption{Sensitivity analysis with $N=24$ subjects and $\delta=0$. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.}\label{tab:small}
+\caption{Null calibration with $N\in\{20,24\}$ subjects. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.}\label{tab:small}
 \small
-\begin{tabular}{llrr}
+\begin{tabular}{llrrrr}
 \toprule
-Design & Method & Reject & Cover \\
+ & & \multicolumn{2}{c}{$N=20$} & \multicolumn{2}{c}{$N=24$} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Design & Method & Reject & Cover & Reject & Cover \\
 \midrule
-Surface & Cluster & 0.060 & 0.940 \\
-Surface & Average & 0.070 & 0.930 \\
-Surface & Independent & 0.626 & 0.374 \\
-Volatility & Quantile & 0.040 & -- \\
-Volatility & Median & 0.050 & -- \\
-Volatility & Ordinary & 0.043 & -- \\
-Volatility & Independent & 0.125 & -- \\
+Surface & Cluster & 0.078 & 0.922 & 0.060 & 0.940 \\
+Surface & Average & 0.077 & 0.923 & 0.070 & 0.930 \\
+Surface & Independent & 0.639 & 0.361 & 0.626 & 0.374 \\
+Volatility & Quantile & 0.042 & -- & 0.040 & -- \\
+Volatility & Median & 0.047 & -- & 0.050 & -- \\
+Volatility & Ordinary & 0.047 & -- & 0.043 & -- \\
+Volatility & Independent & 0.117 & -- & 0.125 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}

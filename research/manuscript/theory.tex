@@ -9,75 +9,77 @@ For a fixed collection of retained segments, covariates, weights, and grid point
 The duplication property makes explicit why repeating an existing record does not increase the independent information in the analysis. The small-sample correction in \eqref{eq:sandwich} depends on $M$ and is not included in that exact invariance statement.
 
 \subsection{Regression asymptotics and bootstrap validity}
-Write $U_i(s)=\sum_jw_{ij}x_{ij}\{Y_{ij}(s)-x_{ij}\trans\beta(s)\}$ and $\Omega(s,s')=\E\{U_i(s)U_i(s')\trans\}$. All observations, covariates, segment counts, and weights from subject $i$ are included in one cluster $\mathcal C_i$. We use the following conditions.
+Allow the segment counts $m_{i,N}$, segment length $n_N$, and bandwidth $h_N$ to vary with the number of subjects $N$. A subscript $N$ denotes the resulting row of the triangular array, including its finite-resolution target $\beta_N$. Write $U_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{Y_{ij,N}(s)-x_{ij,N}\trans\beta_N(s)\}$ and $\Omega_N(s,s')=\E\{U_{i,N}(s)U_{i,N}(s')\trans\}$. The cluster $\mathcal C_{i,N}$ includes all observations, covariates, counts, and weights from subject $i$.
 
 \begin{enumerate}
-\item[(A1)] The clusters $\mathcal C_i$ are independent and identically distributed. The number of covariates $p$ and the grid $\mathcal G$ are fixed.
-\item[(A2)] The matrix $Q=\E Q_i$ is positive definite. For some $\eta>0$, $\E\|Q_i\|^{2+\eta}<\infty$ and $\E\{\max_{s\in\mathcal G}\|U_i(s)\|^{2+\eta}\}<\infty$.
+\item[(A1)] Within each row, the clusters $\mathcal C_{i,N}$ are independent and identically distributed. The number of covariates $p$, the grid $\mathcal G$, and $\epsilon>0$ are fixed.
+\item[(A2)] As $N\to\infty$, $Q_N=\E Q_{i,N}\to Q\succ0$ and $\Omega_N(s,s')\to\Omega(s,s')$ for all $s,s'\in\mathcal G$. For some $\eta>0$, $\sup_N\E\|Q_{i,N}\|^{2+\eta}<\infty$ and $\sup_N\E\{\max_{s\in\mathcal G}\|U_{i,N}(s)\|^{2+\eta}\}<\infty$.
 \item[(A3)] $a\trans Q^{-1}\Omega(s,s)Q^{-1}a>0$ for every contrast and grid point in the simultaneous family.
 \end{enumerate}
 
-The assumptions place no independence requirement on segments within a subject. At fixed $n$ and $\epsilon>0$, the rank spectral response is bounded on its finite grid, so its moment requirements are substantially simpler than moment conditions on the original EEG amplitudes. Conditions on the covariates and the subject-level design are still needed.
+Segments within a subject may be dependent. With weights summing to one, these conditions allow bounded or increasing $m_{i,N}$ and $n_N$ without a separate restriction on their rates relative to $N$. The uniform moment and covariance conditions must still hold. At fixed $n$ the rank spectral response is bounded; this alone does not establish uniform moments when $n_N$ grows.
 
 \begin{theorem}\label{thm:clt}
-Under (A1)--(A2), the regression estimator satisfies, jointly over $s\in\mathcal G$,
+Under (A1)--(A2), as $N\to\infty$, the regression estimator satisfies, jointly over $s\in\mathcal G$,
 \begin{equation}\label{eq:linear}
- \sqrt N\{\widehat\beta(s)-\beta(s)\}
- =Q^{-1}\frac1{\sqrt N}\sum_{i=1}^N U_i(s)+\op(1).
+ \sqrt N\{\widehat\beta_N(s)-\beta_N(s)\}
+ =Q^{-1}\frac1{\sqrt N}\sum_{i=1}^N U_{i,N}(s)+\op(1).
 \end{equation}
-Its $pD$-dimensional stacked limit is mean-zero Gaussian with covariance blocks $V(s,s')=Q^{-1}\Omega(s,s')Q^{-1}$. Moreover, $\max_{s,s'\in\mathcal G}\|\widehat V(s,s')-V(s,s')\|\to0$ in probability.
+Its $pD$-dimensional stacked limit is mean-zero Gaussian with covariance blocks $V(s,s')=Q^{-1}\Omega(s,s')Q^{-1}$. Moreover, $\max_{s,s'\in\mathcal G}\|\widehat V_N(s,s')-V(s,s')\|\to0$ in probability.
 \end{theorem}
 
-The rate is determined by the number of independent subjects. Additional segments change $\Omega$ through the precision of the subject-level responses and may improve estimation, but do not change the unit to which the central limit theorem is applied. Theorem~\ref{thm:clt} also applies to a subject-level paired difference, with its corresponding design and response.
+Additional segments can improve precision, while persistent subject heterogeneity can retain a nonzero variance at the $\sqrt N$ scale. For example, the grand mean of $N$ subjects with $m$ segments each and independent subject and segment effects has variance $\sigma_B^2/N+\sigma_E^2/(Nm)$, where $\sigma_B^2$ and $\sigma_E^2$ are their respective variances. If a contrast's variance at the $\sqrt N$ scale tends to zero, (A3) fails and a different normalization is needed. Theorem~\ref{thm:clt} also applies to subject-level paired differences.
 
 \begin{theorem}\label{thm:bootstrap}
 Suppose (A1)--(A3) hold and the bootstrap is constructed as in \eqref{eq:wild}. Let
-$Z_N=\max_{s\in\mathcal G}|a\trans\{\widehat\beta(s)-\beta(s)\}|/\widehat{\mathrm{se}}(s)$.
-If $\Pp^*$ denotes probability conditional on the data, then
+$Z_N=\max_{s\in\mathcal G}|a\trans\{\widehat\beta_N(s)-\beta_N(s)\}|/\widehat{\mathrm{se}}_N(s)$.
+If $\Pp^*$ denotes probability conditional on the data, then, as $N\to\infty$,
 \begin{equation}\label{eq:bootstrap-valid}
  \sup_{z\in\R}\left|\Pp^*(T_N^*\leq z)-\Pp(Z_N\leq z)\right|
  \longrightarrow 0
  \quad\text{in probability}.
 \end{equation}
-For every fixed $0<\alpha<1$, the simultaneous intervals in \eqref{eq:band} have coverage tending to $1-\alpha$. The associated global test has limiting level $\alpha$ under $H_0$ and is consistent under any fixed alternative for which $\theta(s)\ne\theta_0(s)$ at some grid point.
+For every fixed $0<\alpha<1$, the simultaneous intervals in \eqref{eq:band} cover $a\trans\beta_N$ with probability tending to $1-\alpha$. The global test has limiting level $\alpha$ under $H_0$ and is consistent for alternatives satisfying $\liminf_N\max_{s\in\mathcal G}|a\trans\beta_N(s)-\theta_0(s)|>0$.
 \end{theorem}
 
-This result concerns the complete specified grid, including correlation between its coordinates. It does not require an invertible covariance matrix for the entire surface. Perfect or near-perfect correlation between neighboring coordinates is therefore allowed, provided that each tested contrast has positive variance. The proofs are given in the appendix.
+The result concerns the complete specified grid and permits a singular covariance matrix for the full surface, provided each tested contrast has positive limiting variance. The proofs are given in the appendix.
 
 \subsection{Relation to a latent spectral regression}
-Let $\beta^0$ be the projection defined with $L^0_{ij}$, using the same covariates and weights. Put $e^{\mathrm{sp}}_{ij}(s)=Y_{ij}(s)-L^0_{ij}(s)$ and $A_i(s)=\sum_jw_{ij}x_{ij}e^{\mathrm{sp}}_{ij}(s)$. The target difference is exactly
+Let $\beta_N^0$ be the projection defined with $L^0_{ij,N}$, using the same covariates and weights. Put $e^{\mathrm{sp}}_{ij,N}(s)=Y_{ij,N}(s)-L^0_{ij,N}(s)$ and $A_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}e^{\mathrm{sp}}_{ij,N}(s)$. The target difference is exactly
 \begin{equation}\label{eq:target-bias}
- \beta(s)-\beta^0(s)=Q^{-1}\E A_i(s).
+ \beta_N(s)-\beta_N^0(s)=Q_N^{-1}\E A_{i,N}(s).
 \end{equation}
-A spectral estimation bias common to all covariate values can sometimes be absorbed by the intercept. A bias associated with a covariate can change its slope. Equation~\eqref{eq:target-bias} specifies the relevant quantity without imposing a particular time-series model.
-
-To study longer recordings, allow $n$, $h$, and the distribution of $A_i$ to vary with $N$, and add a subscript $N$ when needed. Let $\widetilde\beta_N^0$ be the estimator in \eqref{eq:estimator} with the unobserved $L^0_{ij,N}$ in place of $Y_{ij,N}$. Define the oracle score by $U^0_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{L^0_{ij,N}(s)-x_{ij,N}\trans\beta_N^0(s)\}$.
+Equation~\eqref{eq:target-bias} distinguishes a spectral bias absorbed by the intercept from one associated with a covariate that changes its slope. Let $\widetilde\beta_N^0$ be the estimator in \eqref{eq:estimator} with $L^0_{ij,N}$ in place of $Y_{ij,N}$, and define $U^0_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{L^0_{ij,N}(s)-x_{ij,N}\trans\beta_N^0(s)\}$.
 
 \begin{theorem}\label{thm:transfer}
-Suppose that the augmented clusters containing the observed responses, latent responses, covariates, and weights are independent and identically distributed within each row of the triangular array. Assume the moment bounds in (A2) hold uniformly in $N$ for $Q_{i,N}$ and $U^0_{i,N}$, that $Q_N=\E Q_{i,N}\to Q$ is positive definite, and that the oracle score covariances converge. The grid and the number of covariates remain fixed. Suppose also that
+Suppose (A1)--(A2) hold for the augmented clusters containing the observed and latent responses, with $U^0_{i,N}$ in place of $U_{i,N}$. If, as $N\to\infty$,
 \begin{equation}\label{eq:transfer-conditions}
  \sqrt N\max_{s\in\mathcal G}\|\E A_{i,N}(s)\|\to0,
  \qquad
  \E\left[\max_{s\in\mathcal G}
- \|A_{i,N}(s)-\E A_{i,N}(s)\|^2\right]\to0.
+ \|A_{i,N}(s)-\E A_{i,N}(s)\|^2\right]\to0,
 \end{equation}
-Then $\max_{s\in\mathcal G}\sqrt N\|\widehat\beta_N(s)-\widetilde\beta_N^0(s)\|\to0$ in probability. The sandwich covariance based on the observed responses is asymptotically equivalent to its oracle counterpart. If the oracle contrast variances have positive limits, the intervals in \eqref{eq:band} consequently cover $a\trans\beta_N^0$ with asymptotic probability $1-\alpha$.
+then $\max_{s\in\mathcal G}\sqrt N\|\widehat\beta_N(s)-\widetilde\beta_N^0(s)\|\to0$ in probability as $N\to\infty$. The observed and oracle sandwich covariances are asymptotically equivalent. If the oracle contrast variances have positive limits, the intervals in \eqref{eq:band} cover $a\trans\beta_N^0$ with probability tending to $1-\alpha$.
 \end{theorem}
 
-The two requirements in \eqref{eq:transfer-conditions} have different roles. The weighted mean spectral error must be negligible at the subject-level inference rate, while the centered error need only vanish in mean square. Consistency of an individual spectral estimator alone does not imply the first requirement. The theorem is a transfer result; verifying its conditions for a particular shrinking bandwidth requires assumptions on the underlying time series, such as those used in the quantile spectral theory of \citet{Kley2016,Birr2017}.
+In \eqref{eq:transfer-conditions}, the mean spectral error must be negligible at the subject inference rate, whereas the centered error need only vanish in mean square. Individual spectral consistency does not ensure the first condition. The next result states sufficient conditions linking $N$, $m_{i,N}$, and $n_N$.
 
-The log transformation explains one source of the mean error. The following expansion holds conditionally on any variables that determine $S$ and the segment's data-generating law.
-
-\begin{lemma}\label{lem:logbias}
-Let $\mathcal H$ be a sigma-field, $\widehat S\geq0$, $S\geq0$, $\epsilon>0$, and $d=\widehat S-S$, with $\E(|d|^3\mid\mathcal H)<\infty$ and $S$ measurable with respect to $\mathcal H$. Then
-\begin{equation}\label{eq:logbias}
- \begin{split}
- \E\{\log(\widehat S+\epsilon)-\log(S+\epsilon)\mid\mathcal H\}
- &=\frac{\E(d\mid\mathcal H)}{S+\epsilon}
- -\frac{\E(d^2\mid\mathcal H)}{2(S+\epsilon)^2}+r,\\
- |r|&\leq\frac{\E(|d|^3\mid\mathcal H)}{3\epsilon^3}.
- \end{split}
+\begin{corollary}\label{cor:growth}
+Assume (A1)--(A2) with oracle scores $U^0_{i,N}$, and $w_{ij,N}\leq C/m_{i,N}$ for a constant $C$ independent of $N$, with $m_{i,N}\geq\underline m_N\geq1$. Let $\mathcal H_{i,N}$ contain the latent spectra, covariates, counts, and weights. Write $\widehat S_{ij,N}$ for \eqref{eq:est-spectrum} at length $n_N$ and bandwidth $h_N$. For $d_{ij,N}=\widehat S_{ij,N}-S_{ij,N}$, suppose uniformly in $i,j,s$ that, for deterministic $b_N,v_N\geq0$,
+$|\E(d_{ij,N}(s)\mid\mathcal H_{i,N})|\leq b_N$ and $\E\{d_{ij,N}(s)^2\mid\mathcal H_{i,N}\}\leq v_N$.
+Suppose also that the centered log errors $e^{\mathrm{c}}_{ij,N}(s)=e^{\mathrm{sp}}_{ij,N}(s)-\E\{e^{\mathrm{sp}}_{ij,N}(s)\mid\mathcal H_{i,N}\}$ satisfy
+\[
+ \max_j\sum_{k=1}^{m_{i,N}}
+ \left|\cov\{e^{\mathrm{c}}_{ij,N}(s),e^{\mathrm{c}}_{ik,N}(s)\mid\mathcal H_{i,N}\}\right|
+ \leq Cv_N.
+\]
+Then, as $N\to\infty$,
+\begin{equation}\label{eq:growth-rate}
+ \max_{s\in\mathcal G}\|\widehat\beta_N(s)-\widetilde\beta_N^0(s)\|
+ =\Op\left(b_N+v_N+\sqrt{\frac{v_N}{N\underline m_N}}\right).
 \end{equation}
-\end{lemma}
+If $\sqrt N(b_N+v_N)\to0$, the conclusions of Theorem~\ref{thm:transfer} hold, with its positivity condition for coverage.
+\end{corollary}
 
-The second term in \eqref{eq:logbias} shows that a nearly unbiased spectral estimate can still have a biased log transform. The fixed-resolution regression retains this feature as part of its measurement definition. Inference for a latent log spectrum additionally requires the approximation conditions in Theorem~\ref{thm:transfer}. Proofs of this theorem and the lemma are given in the appendix.
+The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
+For example, if the segment estimator satisfies the stated conditional moment bounds with $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$ and $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, then $\sqrt N\{h_N^2+(n_Nh_N)^{-1}\}\to0$ suffices. With $h_N=n_N^{-1/3}$, this becomes $N=o(n_N^{4/3})$, while $\underline m_N$ may remain bounded or diverge. These spectral moment bounds require verification for the chosen time-series model and smoother, beyond the regression conditions; see \citet{Kley2016,Birr2017} for related quantile spectral theory.
