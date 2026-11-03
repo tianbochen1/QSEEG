@@ -93,7 +93,7 @@ The primary response is a finite-window, smoothed log rank spectrum on a common 
 
 The age analysis uses adjusted between-person associations. The medication analysis uses within-person temazepam-minus-placebo contrasts. Stage-2 Fpz-Cz is primary in both studies. REM and Pz-Oz analyses are secondary. Direct quantile heterogeneity tests compare all nonmedian quantile curves with the median curve, with Holm adjustment across the four stage-channel combinations within each study.
 
-There are 27 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 26 configurations, including null calibration with 20 and 24 subjects. The archived contamination alternative is additional material without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
+There are 29 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 28 configurations, including null calibration with 20, 24, and 40 subjects. The archived contamination alternative is additional material without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
 
 ## Files
 
@@ -102,7 +102,7 @@ There are 27 main and additional simulation configurations with 1,000 datasets p
 | `research/code/core.py` | Spectral responses, weighted regression, covariance estimation, and bootstrap inference |
 | `research/code/simulate.py` | Main regression-surface and raw time-series simulation designs |
 | `research/code/extra_simulation.py` | Additional effect sizes and small-subject designs |
-| `research/code/small_sample_simulation.py` | Null calibration with 20 subjects and Monte Carlo uncertainty summaries |
+| `research/code/small_sample_simulation.py` | Null calibration with 20 and 40 subjects and Monte Carlo uncertainty summaries |
 | `research/code/gaussian_comparison.py` | Gaussian multiplier comparison |
 | `research/code/read_annotations.py` | Sleep-stage annotation reader |
 | `research/code/acquire_eeg.py` | Recording acquisition, interval selection, and quality indicators |

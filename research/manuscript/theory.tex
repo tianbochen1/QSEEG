@@ -82,4 +82,15 @@ If $\sqrt N(b_N+v_N)\to0$, the conclusions of Theorem~\ref{thm:transfer} hold, w
 \end{corollary}
 
 The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
-For example, if the segment estimator satisfies the stated conditional moment bounds with $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$ and $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, then $\sqrt N\{h_N^2+(n_Nh_N)^{-1}\}\to0$ suffices. With $h_N=n_N^{-1/3}$, this becomes $N=o(n_N^{4/3})$, while $\underline m_N$ may remain bounded or diverge. These spectral moment bounds require verification for the chosen time-series model and smoother, beyond the regression conditions; see \citet{Kley2016,Birr2017} for related quantile spectral theory.
+
+\begin{corollary}\label{cor:ratios}
+Retain the oracle, weighting, and conditional moment and covariance assumptions of Corollary~\ref{cor:growth}. Suppose the oracle contrast variances have positive limits, $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$, $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, and $h_N=n_N^{-1/3}$. Let $N,m_N,n_N\to\infty$, with $cm_N\leq m_{i,N}\leq Cm_N$ almost surely for constants $0<c\leq C<\infty$, and
+\[
+ \frac{m_N}{N}\to\kappa\in[0,\infty],
+ \qquad
+ \frac{n_N}{N}\to\rho\in(0,\infty].
+\]
+Here an infinite limit means that the corresponding ratio diverges. Then $\sqrt N(\widehat\beta_N-\widetilde\beta_N^0)=\op(1)$ jointly over $\mathcal G$. Thus $\sqrt N(\widehat\beta_N-\beta_N^0)$ has the centered Gaussian limit obtained by applying Theorem~\ref{thm:clt} to the oracle responses. The sandwich covariance consistently estimates the covariance of this limit, and the bootstrap intervals in \eqref{eq:band} have limiting coverage $1-\alpha$ for $a\trans\beta_N^0$.
+\end{corollary}
+
+For this bandwidth, the broader sufficient relation in Corollary~\ref{cor:growth} is $N=o(n_N^{4/3})$, and segment counts may remain bounded. The conditional spectral moment bounds require verification for the chosen time-series model and smoother; see \citet{Kley2016,Birr2017} for related quantile spectral theory.

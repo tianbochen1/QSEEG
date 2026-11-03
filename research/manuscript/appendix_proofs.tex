@@ -72,6 +72,14 @@ Indeed, expand the squared norm and use $2w_jw_k|x_j\trans x_k|\leq w_j^2\|x_j\|
 \]
 Substituting these bounds into \eqref{eq:oracle-difference} proves \eqref{eq:growth-rate}. If $\sqrt N(b_N+v_N)\to0$, then $B_N\sqrt N\to0$ and $v_N/\underline m_N\to0$, proving \eqref{eq:transfer-conditions}. \hfill$\square$
 
+\subsubsection*{Proof of Corollary~\ref{cor:ratios}}
+The bandwidth choice gives $b_N+v_N=O(n_N^{-2/3})$. Taking $\underline m_N=cm_N$ in \eqref{eq:growth-rate}, for sufficiently large $N$, yields
+\[
+ \max_{s\in\mathcal G}\sqrt N\|\widehat\beta_N(s)-\widetilde\beta_N^0(s)\|
+ =\Op\left(\sqrt N n_N^{-2/3}+n_N^{-1/3}m_N^{-1/2}\right)=\op(1).
+\]
+Indeed, $\rho>0$, including $\rho=\infty$, makes $n_N/N$ bounded away from zero, so the first term is $O(N^{-1/6})$; the second vanishes as $m_N,n_N\to\infty$. Since $\sqrt N(b_N+v_N)\to0$, Corollary~\ref{cor:growth} and the oracle versions of Theorems~\ref{thm:clt}--\ref{thm:bootstrap} give the remaining assertions. \hfill$\square$
+
 \subsection{Simulation models and estimands}
 For the regression-surface experiment, generate independent standard normal variables $z_i,a_i^0,u_i,v_i$ and put $a_i=0.5z_i+a_i^0$. The segment covariate is $r_{ij}=0.6a_i+0.2z_i+0.5v_i+\nu_{ij}$, with independent standard normal $\nu_{ij}$. The regression weights are $1/m_i$. Let $g_1(f)=\exp[-\{(f-0.08)/0.035\}^2/2]$ and $g_2(f)=\exp[-\{(f-0.21)/0.045\}^2/2]$. The coefficient surfaces are $b_a(f,\tau)=\delta(2\tau-1)^2\{g_1(f)-0.6g_2(f)\}$, $b_z(f,\tau)=0.2\cos(2\pi f)$, and $b_r(f,\tau)=0.4\{1+0.5(\tau-0.5)\}g_2(f)$.
 

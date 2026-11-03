@@ -1,4 +1,4 @@
-"""Null calibration with 20 independent subjects."""
+"""Null calibration with 20 and 40 independent subjects."""
 
 import os
 
@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIGS = [
     dict(kind="surface", N=20, m=4, effect=0, id=108),
     dict(kind="sv", N=20, m=6, n=512, effect=0, id=109),
+    dict(kind="surface", N=40, m=4, effect=0, id=110),
+    dict(kind="sv", N=40, m=6, n=512, effect=0, id=111),
 ]
 REPLICATIONS = 1000
 METHODS = {

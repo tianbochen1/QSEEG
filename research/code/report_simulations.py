@@ -17,7 +17,7 @@ for filename in ['simulation_final.jsonl','extra_final.jsonl','small_sample_fina
 for (cid,rep),r in unique.items():
     counts[cid]=counts.get(cid,0)+1
     for method,v in r['metrics'].items():rows.append({**r['config'],'method':method,**v})
-assert len(counts)==27 and set(counts.values())=={1000},counts
+assert len(counts)==29 and set(counts.values())=={1000},counts
 (OUT/'simulation_verified.jsonl').write_text(''.join(json.dumps(unique[k])+'\n' for k in sorted(unique)))
 df=pd.DataFrame(rows)
 summ=df.groupby(['id','kind','N','m','effect','method'],dropna=False).agg(reject=('reject','mean'),cover=('cover','mean'),width=('width','mean'),rmse=('rmse',lambda x:np.sqrt(x.pow(2).mean()))).reset_index()
@@ -72,12 +72,12 @@ for cid in [9,102,100,101,10,11,12,105,103,104,13,14,15]:
     if cid==16:lab='SV + contamination'
     text+=line([lab,str(c['N']),str(c['n']),f"{c['effect']:.1f}"]+[f'{by[cid,m]["reject"]:.3f}' for m in ['Quantile','Median','Ordinary','Independent']])
 text+=table_end();(MAN/'table_raw.tex').write_text(text)
-text=table_start(r'Null calibration with $N\in\{20,24\}$ subjects. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.','tab:small','llrrrr',['Design','Method','Reject','Cover','Reject','Cover'])
-text=text.replace('\\toprule\n','\\toprule\n'+r' & & \multicolumn{2}{c}{$N=20$} & \multicolumn{2}{c}{$N=24$} \\'+'\n'+r'\cmidrule(lr){3-4}\cmidrule(lr){5-6}'+'\n',1)
-for cid20,cid24,methods in [(108,106,['Cluster','Average','Independent']),(109,107,['Quantile','Median','Ordinary','Independent'])]:
+text=table_start(r'Null calibration with $N\in\{20,24,40\}$ subjects. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.','tab:small','llrrrrrr',['Design','Method','Reject','Cover','Reject','Cover','Reject','Cover'])
+text=text.replace('\\toprule\n','\\toprule\n'+r' & & \multicolumn{2}{c}{$N=20$} & \multicolumn{2}{c}{$N=24$} & \multicolumn{2}{c}{$N=40$} \\'+'\n'+r'\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}'+'\n',1)
+for cid20,cid24,cid40,methods in [(108,106,110,['Cluster','Average','Independent']),(109,107,111,['Quantile','Median','Ordinary','Independent'])]:
     for m in methods:
         values=['Surface' if cid20==108 else 'Volatility',m]
-        for cid in [cid20,cid24]:
+        for cid in [cid20,cid24,cid40]:
             r=by[cid,m];values.extend([f'{r["reject"]:.3f}',f'{r["cover"]:.3f}' if cid20==108 else '--'])
         text+=line(values)
 text+=table_end();(MAN/'table_small.tex').write_text(text)
