@@ -8,8 +8,8 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE_URL = 'https://github.com/tianbochen1/QSEEG/releases/download/v1.0.1/QSEEG_code.zip'
-BASE_SHA256 = 'dd72eca96bdb14f1b137eb116acfce5a34cebc6d98ea1fa840cbddcc14f643b8'
+BASE_URL = 'https://github.com/tianbochen1/QSEEG/releases/download/v1.0.2/QSEEG_code.zip'
+BASE_SHA256 = '38bc82d95869c735edc1f12f845fae71f59386e9e0d59f64c0ab3617c44e656d'
 
 
 def build(baseline, destination):

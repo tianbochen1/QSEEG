@@ -9,7 +9,7 @@ For a fixed collection of retained segments, covariates, weights, and grid point
 The duplication property makes explicit why repeating an existing record does not increase the independent information in the analysis. The small-sample correction in \eqref{eq:sandwich} depends on $M$ and is not included in that exact invariance statement.
 
 \subsection{Regression asymptotics and bootstrap validity}
-Allow the segment counts $m_{i,N}$, segment length $n_N$, and bandwidth $h_N$ to vary with the number of subjects $N$. A subscript $N$ denotes the resulting row of the triangular array, including its finite-resolution regression target $\beta_N$. Write $U_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{Y_{ij,N}(s)-x_{ij,N}\trans\beta_N(s)\}$ and $\Omega_N(s,s')=\E\{U_{i,N}(s)U_{i,N}(s')\trans\}$. The cluster $\mathcal C_{i,N}$ includes all observations, covariates, counts, and weights from subject $i$.
+Allow the segment counts $m_{i,N}$, segment length $n_N$, and bandwidth $h_N$ to vary with the number of subjects $N$. A subscript $N$ denotes the resulting row of the triangular array, including its finite-resolution regression target $\beta_N$. Write $U_{i,N}(s)=\sum_jw_{ij,N}x_{ij,N}\{Y_{ij,N}(s)-x_{ij,N}\trans\beta_N(s)\}$ and $\Omega_N(s,s')=\E\{U_{i,N}(s)U_{i,N}(s')\trans\}$. The cluster $\mathcal C_{i,N}$ includes all observations, covariates, counts, and weights from subject $i$. Vector norms are Euclidean and matrix norms are operator norms.
 
 \begin{enumerate}
 \item[(A1)] Within each row, the clusters $\mathcal C_{i,N}$ are independent and identically distributed. The number of covariates $p$, the grid $\mathcal G$, and $\epsilon>0$ are fixed.
@@ -83,7 +83,7 @@ If $\sqrt N(b_N+v_N)\to0$, the conclusions of Theorem~\ref{thm:transfer} hold, w
 
 The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
 
-\begin{corollary}[Illustrative proportional growth]\label{cor:ratios}
+\begin{corollary}[Joint growth]\label{cor:ratios}
 Retain the oracle, weighting, and conditional moment and covariance assumptions of Corollary~\ref{cor:growth}. Suppose the oracle contrast variances have positive limits, $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$, $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, and $h_N=n_N^{-1/3}$. Let $N,m_N,n_N\to\infty$, with $cm_N\leq m_{i,N}\leq Cm_N$ almost surely for constants $0<c\leq C<\infty$, and
 \[
  \frac{m_N}{N}\to\kappa\in[0,\infty],

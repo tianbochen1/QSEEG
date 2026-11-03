@@ -2,9 +2,9 @@ cff-version: 1.2.0
 message: "If you use these materials, please cite the accompanying manuscript: Quantile spectral regression and simultaneous inference for repeated EEG recordings, by Tianbo Chen and Hanbing Zhu."
 type: software
 title: "QSEEG: Quantile spectral regression and simultaneous inference for repeated EEG recordings"
-version: 1.0.2
+version: 1.0.3
 date-released: 2026-11-03
-url: "https://github.com/tianbochen1/QSEEG/releases/tag/v1.0.2"
+url: "https://github.com/tianbochen1/QSEEG/releases/tag/v1.0.3"
 authors:
   - family-names: Chen
     given-names: Tianbo
