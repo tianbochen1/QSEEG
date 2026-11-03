@@ -17,7 +17,7 @@ The primary target is the regression of finite-window log spectral summaries at 
 
 ## Simulation studies and EEG applications
 
-The simulation studies assess simultaneous coverage, precision, and sensitivity to changes in temporal dependence. They show why subject weighting and dependence correction address different aspects of inference. In stochastic-volatility settings, noncentral quantile spectra detect dependence changes that can be missed by median-only and ordinary spectral analyses. Ordinary spectral regression remains competitive in the Gaussian autoregressive settings. Null experiments include 20, 24, and 40 subjects. The proposed procedure has rejection probabilities of 0.078, 0.060, and 0.064 in the regression-surface model and 0.042, 0.040, and 0.050 in the stochastic-volatility model, respectively. Surface-model coverage is 0.922, 0.940, and 0.936, so some undercoverage remains with few subjects.
+The simulation studies assess simultaneous coverage, precision, and sensitivity to changes in temporal dependence. They show why subject weighting and dependence correction address different aspects of inference. In stochastic-volatility settings, noncentral quantile spectra detect dependence changes that can be missed by median-only and ordinary spectral analyses. Ordinary spectral regression remains competitive in the Gaussian autoregressive settings. Null experiments with 40 subjects give rejection probabilities of 0.064 in the regression-surface model and 0.050 in the stochastic-volatility model. Surface-model coverage is 0.936, slightly below the nominal 0.95.
 
 Applications use the Sleep-EDF Database Expanded. The age study examines adjusted between-person associations, including quantile-dependent age associations in parietal-occipital recordings. The paired study examines frequency-dependent temazepam-minus-placebo contrasts within the same person and sleep stage. These analyses describe spectral associations and paired contrasts, rather than clinical treatment benefits.
 
@@ -26,7 +26,7 @@ Applications use the Sleep-EDF Database Expanded. The age study examines adjuste
 The computational materials are distributed in two parts:
 
 1. Download **QSEEG_code.zip** from the [data bundle release](https://github.com/tianbochen1/QSEEG/releases/tag/v1.0.1). It contains source metadata and sleep-stage annotations, derived spectral features for 197 recordings, and the existing simulation and EEG results.
-2. Download the [current repository source archive](https://github.com/tianbochen1/QSEEG/archive/refs/heads/main.zip). It contains the current programs and manuscript components, together with the additional results for 20 and 40 subjects.
+2. Download the [current repository source archive](https://github.com/tianbochen1/QSEEG/archive/refs/heads/main.zip). It contains the current programs and manuscript components, together with additional null-simulation records.
 
 Extract both archives. Merge the repository's `research/` directory into `QSEEG_code/research/`, replacing matching files and retaining the other data and result files from the data bundle. Then enter the `QSEEG_code` directory and run:
 
@@ -48,7 +48,7 @@ The GitHub-generated **Source code** archives contain the repository files only.
 | `research/code/` | Twelve Python programs for spectral features, estimation, inference, simulations, EEG analysis, and reporting |
 | `research/data/` | Official participant metadata, recording list, and source-file checksum manifest |
 | `research/manuscript/` | Manuscript components and bibliography |
-| `research/results/` | Additional null-simulation results for 20 and 40 subjects |
+| `research/results/` | Additional null-simulation records |
 | `requirements.txt` | Python dependencies |
 | `docs/REPRODUCIBILITY.md` | Data provenance and reproduction instructions |
 
