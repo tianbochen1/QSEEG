@@ -8,8 +8,8 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE_URL = 'https://github.com/tianbochen1/QSEEG/releases/download/v1.0.2/QSEEG_code.zip'
-BASE_SHA256 = '38bc82d95869c735edc1f12f845fae71f59386e9e0d59f64c0ab3617c44e656d'
+BASE_URL = 'https://github.com/tianbochen1/QSEEG/releases/download/v1.0.3/QSEEG_code.zip'
+BASE_SHA256 = '09519372476ff168414ab448913f8f7d501930795ff1727a15d4c63a68905707'
 
 
 def build(baseline, destination):
@@ -23,7 +23,7 @@ def build(baseline, destination):
             data = candidate.read_bytes() if candidate.is_file() else original.read('QSEEG_code/' + name)
             actual = hashlib.sha256(data).hexdigest()
             assert actual == expected, f'Content mismatch: {name}'
-            info = zipfile.ZipInfo('QSEEG_code/' + name, date_time=(2026, 11, 3, 0, 0, 0))
+            info = zipfile.ZipInfo('QSEEG_code/' + name, date_time=(2026, 11, 4, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.create_system = 3
             info.external_attr = 0o100644 << 16

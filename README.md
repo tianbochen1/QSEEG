@@ -23,7 +23,7 @@ Applications use the Sleep-EDF Database Expanded. The age study examines adjuste
 
 ## Download and reproduce
 
-Download **[QSEEG_code.zip from version 1.0.3](https://github.com/tianbochen1/QSEEG/releases/download/v1.0.3/QSEEG_code.zip)**. This complete bundle contains the matching programs and manuscript components, source metadata and annotations, derived spectral features for 197 recordings, and all numerical results needed to reproduce the paper. No merging of separate source and data archives is required.
+Download **[QSEEG_code.zip from version 1.0.4](https://github.com/tianbochen1/QSEEG/releases/download/v1.0.4/QSEEG_code.zip)**. This complete bundle contains the matching programs and manuscript components, source metadata and annotations, derived spectral features for 197 recordings, and all numerical results needed to reproduce the paper. No merging of separate source and data archives is required.
 
 Extract the bundle, enter `QSEEG_code`, and run:
 

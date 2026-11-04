@@ -46,7 +46,7 @@ fig,axs=plt.subplots(1,2,figsize=(7,2.8),sharey=True,layout='constrained')
 b,se,c=read('SC_2_1_main','heterogeneity');b=b.reshape(8,60);se=se.reshape(8,60)
 for ax,k,label in zip(axs,[0,7],[r'(a) $\tau=0.1$ minus median',r'(b) $\tau=0.9$ minus median']):
     add(ax,b[k],se[k],c,'#165B83');ax.set_xlabel('Frequency (Hz)');ax.set_title(label,loc='left')
-axs[0].set_ylabel('Difference in age coefficients')
+axs[0].set_ylabel('Difference in age coefficients\n(per decade)')
 fig.savefig(FIG/'age_quantile_contrasts.pdf');fig.savefig(ROOT/'qa'/'age_quantile_contrasts.png',dpi=180);plt.close(fig)
 # All quantile levels are displayed in the supplementary surface figure.
 fig,axs=plt.subplots(1,3,figsize=(7.1,2.9),layout='constrained')
@@ -68,7 +68,7 @@ for row,study in enumerate(['SC','ST']):
         ax=axs[row,colidx];ax.axhline(0,color='#444444',lw=.6);ax.set_title(f'({"abcdef"[row*3+colidx]}) '+('Age' if row==0 else 'Paired')+fr', $\tau = {t[qi]:.1f}$',loc='left',fontsize=9);ax.grid(axis='y',alpha=.18)
         ax.set_xlim(.5,30);ax.set_xticks([.5,10,20,30]);ax.xaxis.set_major_formatter(FormatStrFormatter('%g'))
         if row==1:ax.set_xlabel('Frequency (Hz)')
-    axs[row,0].set_ylabel('Coefficient')
+    axs[row,0].set_ylabel('Age coefficient\n(per decade)' if row==0 else 'Adjusted paired\ncontrast')
 handles,labels=axs[0,1].get_legend_handles_labels();fig.legend(handles,labels,loc='outside lower center',ncol=4,frameon=False,fontsize=8)
 fig.savefig(FIG/'sensitivity_eeg.pdf');fig.savefig(ROOT/'qa'/'sensitivity_eeg.png',dpi=180);plt.close(fig)
 
@@ -79,7 +79,7 @@ def holm(vals):
 j={p.stem:json.loads(p.read_text()) for p in D.glob('*.json')}
 text=r'''\begin{table}[htbp]
 \centering
-\caption{Numbers of included subjects and segments and global $p$-values. Quantile tests use all frequency--quantile grid points. The heterogeneity test compares every nonmedian quantile curve with the median curve. Adjusted heterogeneity $p$-values use Holm's procedure across the four stage--channel analyses within each study.}\label{tab:eeg}
+\caption{Subjects, retained segments, and global $p$-values. Segment counts for the paired analyses are before night averaging; regression uses one difference per subject. Quantile tests cover the full grid. Heterogeneity tests compare nonmedian quantile curves with the median, with Holm adjustment across the four stage--channel analyses within each study.}\label{tab:eeg}
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lllrrrr}

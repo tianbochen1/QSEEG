@@ -6,7 +6,7 @@ Computational materials for *Quantile spectral regression and simultaneous infer
 
 **Corresponding author:** Hanbing Zhu, zhuhbecnu@163.com.
 
-**Version:** 1.0.3
+**Version:** 1.0.4
 
 **Repository:** https://github.com/tianbochen1/QSEEG
 

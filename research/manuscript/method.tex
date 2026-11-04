@@ -27,7 +27,7 @@ The smoothing weights are nonnegative and sum to one. We use a Gaussian kernel w
 This construction uses $\tau$ to define a time series of quantile events. The subsequent regression models the mean log spectral response, rather than a conditional quantile of a scalar outcome. Because thresholds are relative to each segment's marginal distribution, a tail quantile does not correspond to a common voltage threshold across subjects. Normalization removes the marginal variance of the indicator sequence, allowing dependence patterns at different quantiles to be compared on the same scale.
 
 \subsection{The regression target and subject weights}
-Choose nonnegative weights $w_{ij}$ with $\sum_j w_{ij}=1$. Equal segment weights within a subject give $w_{ij}=1/m_i$. When subject $i$ has $K_i$ nights with $m_{ik}$ eligible segments on night $k$, $m_i=\sum_{k=1}^{K_i}m_{ik}$. Writing $w_{ikj}$ for the weight of segment $j$ within night $k$, the choice $w_{ikj}=1/(K_i m_{ik})$ gives equal weight to the available nights and equal total weight to every subject. The weighting scheme is part of the estimand.
+Choose nonnegative weights $w_{ij}$ with $\sum_j w_{ij}=1$. Equal segment weights within a subject give $w_{ij}=1/m_i$. When subject $i$ has $K_i$ nights with retained segments, let $m_{ik}\geq1$ be the retained count on night $k$, so that $m_i=\sum_{k=1}^{K_i}m_{ik}$. Writing $w_{ikj}$ for the weight of segment $j$ within night $k$, the choice $w_{ikj}=1/(K_i m_{ik})$ gives equal weight to these nights and equal total weight to every subject. The weighting scheme is part of the estimand.
 
 Assume that $Q=\E(\sum_jw_{ij}x_{ij}x_{ij}\trans)$ is positive definite. At each $s\in\mathcal G$, define
 \begin{equation}\label{eq:target}
