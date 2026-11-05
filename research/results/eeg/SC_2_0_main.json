@@ -1,0 +1,73 @@
+{
+  "input_sha256": "696cede1cde58478e4302ee7551fea9a276a59673d9ca09c913191f6f7816f87",
+  "quantile": {
+    "p": 0.0002,
+    "maxstat": 5.122466045857218,
+    "critical": 2.9607587948142484,
+    "median_se": 0.011704494118851352,
+    "min_effect": -0.07496660305881321,
+    "max_effect": 0.032347208344706474,
+    "positive_points": 19,
+    "negative_points": 169,
+    "gridpoints": 540
+  },
+  "ordinary": {
+    "p": 0.0002,
+    "maxstat": 5.653664156387437,
+    "critical": 2.685260112429429,
+    "median_se": 0.030474707134185163,
+    "min_effect": -0.17936855028471094,
+    "max_effect": -0.0035839379424452843,
+    "positive_points": 0,
+    "negative_points": 29,
+    "gridpoints": 60
+  },
+  "shape": {
+    "p": 0.0004,
+    "maxstat": 4.802000074016755,
+    "critical": 2.793873153414915,
+    "median_se": 0.025314156358997256,
+    "min_effect": -0.13870720133958986,
+    "max_effect": 0.037076205443099974,
+    "positive_points": 2,
+    "negative_points": 19,
+    "gridpoints": 60
+  },
+  "median": {
+    "p": 0.0002,
+    "maxstat": 4.698517651075509,
+    "critical": 2.724826172518518,
+    "median_se": 0.012310359087532786,
+    "min_effect": -0.07465596591352917,
+    "max_effect": 0.032347208344706474,
+    "positive_points": 2,
+    "negative_points": 16,
+    "gridpoints": 60
+  },
+  "heterogeneity": {
+    "p": 0.1812,
+    "maxstat": 2.8680086691619238,
+    "critical": 3.439820444712942,
+    "median_se": 0.0027549096784906186,
+    "min_effect": -0.013358985023400527,
+    "max_effect": 0.007724706556421394,
+    "positive_points": 0,
+    "negative_points": 0,
+    "gridpoints": 480
+  },
+  "se_ratio_cluster_independent": 4.04211048375244,
+  "study": "SC",
+  "stage": 2,
+  "channel": 0,
+  "variant": "main",
+  "N": 78,
+  "segments": 3059,
+  "recordings": 153,
+  "candidate_segments": 3060,
+  "excluded_segments": 1,
+  "age_min": 25.0,
+  "age_max": 101.0,
+  "age_median": 57.0,
+  "female": 41,
+  "paired_subjects": null
+}

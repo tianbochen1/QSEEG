@@ -8,7 +8,7 @@ The informative-count experiment separates weighting from covariance correction 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{simulation_calibration.pdf}
-\caption{Calibration and band width in the null regression-surface experiment. Error bars in panel (a) show 95\% Wilson intervals for the Monte Carlo coverage probabilities. The dashed line marks nominal simultaneous coverage. Cluster and Average retain the subject as the independent unit; Independent treats recording segments as independent.}\label{fig:calibration}
+\caption{Calibration and band width in the null regression-surface experiment. Error bars in panel (a) show 95\% Wilson intervals for the Monte Carlo coverage probabilities. Symbols are offset horizontally within each design. The dashed line marks nominal simultaneous coverage. Cluster and Average use subjects as independent units, and Independent uses recording segments.}\label{fig:calibration}
 \end{figure}
 
 \subsection{Sensitivity to ordinary and distribution-specific dependence}
@@ -18,7 +18,7 @@ The Gaussian autoregression changes dependence across the distribution. For an e
 
 The volatility model gives a different comparison. At $\delta=1$, the full quantile procedure rejects with probability 0.854, compared with 0.054 for the median-only analysis and 0.061 for ordinary log-power regression. The nonmedian quantile indicators capture dependence on volatility persistence, whereas the population median indicator spectrum and ordinary spectrum remain flat. For stronger changes, ordinary log-power regression at finite resolution can also reject more often. This is consistent with a persistence-dependent expectation of the log spectral estimator and should not be interpreted as a change in the population second-order spectrum. The longer-window experiment and the full AR and SV rejection probabilities are reported in the appendix.
 
-With $N=40$, the subject-level rejection probabilities are 0.064 in the surface model and 0.050 in the volatility model (Table~\ref{tab:small}). Surface-model coverage is 0.936, slightly below the nominal 0.95. The studentized Rademacher wild bootstrap is better calibrated than the fixed-standard-error Gaussian multiplier procedure in the separate comparison given in the appendix. Those procedures differ in both their multiplier distribution and their standard-error calculation.
+With $N=40$, the subject-level rejection probabilities are 0.064 in the surface model and 0.050 in the volatility model (Table~\ref{tab:small}). The simultaneous coverage probabilities are 0.936 and 0.950, respectively. The studentized Rademacher wild bootstrap is better calibrated than the fixed-standard-error Gaussian multiplier procedure in the separate comparison given in the appendix. Those procedures differ in both their multiplier distribution and their standard-error calculation.
 
 \begin{figure}[htbp]
 \centering

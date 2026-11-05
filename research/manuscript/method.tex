@@ -1,6 +1,6 @@
 \section{Method}\label{sec:method}
 \subsection{Repeated recordings and quantile spectra}
-Let $i=1,\ldots,N$ index independent subjects and let $j=1,\ldots,m_i$ index the available segments from subject $i$. Segment $j$ contains observations $X_{ijt}$, $t=1,\ldots,n$, and a covariate vector $x_{ij}\in\R^p$ that includes an intercept. Covariates may be constant within a subject, vary between nights, or vary between segments. The same segment length and spectral construction are used for all observations in a given analysis. Different stages or channels can be analyzed separately, with the subject retained as the independent sampling unit.
+Let $i=1,\ldots,N$ index independent subjects and let $j=1,\ldots,m_i$ index the available segments from subject $i$. Segment $j$ contains observations $X_{ij,t}$, $t=1,\ldots,n$, and a covariate vector $x_{ij}\in\R^p$ that includes an intercept. Covariates may be constant within a subject, vary between nights, or vary between segments. The same segment length and spectral construction are used for all observations in a given analysis. Different stages or channels can be analyzed separately, with the subject retained as the independent sampling unit.
 
 For interpretation, suppose a segment is drawn from a stationary process with continuous marginal distribution $F_{ij}$. For $\tau\in(0,1)$, its diagonal copula autocovariance is $\gamma_{ij,\tau}(\ell)=\cov\{\ind(F_{ij}(X_{ij,t})\leq\tau),\ind(F_{ij}(X_{ij,t-\ell})\leq\tau)\}$. When these autocovariances are absolutely summable, define the normalized diagonal quantile spectrum by
 \begin{equation}\label{eq:spectrum}
@@ -11,12 +11,12 @@ For interpretation, suppose a segment is drawn from a stationary process with co
 \end{equation}
 Here $f$ is measured in cycles per observation. At sampling rate $r$ Hz, physical frequency is $rf$. The spectrum in \eqref{eq:spectrum} is real and nonnegative, and its integral over the full frequency interval equals one. For independent observations it is identically one. Values at different $\tau$ describe the temporal dependence of events below different marginal quantiles. The diagonal spectrum does not contain the cross-quantile phase information available in the full copula spectral kernel \citep{Dette2015,Kley2016}.
 
-The empirical response uses within-segment ranks. Let $R_{ijt}$ denote the average rank of $X_{ijt}$ and set $I_{ijt}(\tau)=\ind\{R_{ijt}/(n+1)\leq\tau\}$. Write $\bar I_{ij}(\tau)=n^{-1}\sum_{t=1}^n I_{ijt}(\tau)$ and $v_{ij}(\tau)=\bar I_{ij}(\tau)\{1-\bar I_{ij}(\tau)\}$. The analysis uses a common quantile grid on which $v_{ij}(\tau)>0$ for every retained segment. At Fourier frequency $f_k=k/n$, the normalized rank periodogram and its smoothed version are
+The empirical response uses within-segment ranks. Let $R_{ij,t}$ be the rank of $X_{ij,t}$ among the $n$ observations in its segment, with ties assigned their midranks. Set $I_{ij,t}(\tau)=\ind\{R_{ij,t}/(n+1)\leq\tau\}$. Write $\bar I_{ij}(\tau)=n^{-1}\sum_{t=1}^n I_{ij,t}(\tau)$ and $v_{ij}(\tau)=\bar I_{ij}(\tau)\{1-\bar I_{ij}(\tau)\}$. A segment is retained only if $v_{ij}(\tau)>0$ at every quantile in the common analysis grid. At Fourier frequencies $f_k=k/n$, $k=0,\ldots,n-1$, interpreted modulo one, the normalized rank periodogram and its smoothed version are
 \begin{equation}\label{eq:est-spectrum}
  \begin{split}
  P_{ij}(f_k,\tau)
  &=\frac{1}{n v_{ij}(\tau)}
- \left|\sum_{t=1}^n\{I_{ijt}(\tau)-\bar I_{ij}(\tau)\}
+ \left|\sum_{t=1}^n\{I_{ij,t}(\tau)-\bar I_{ij}(\tau)\}
  e^{-2\pi\mathrm{i}kt/n}\right|^2,\\
  \widehat S_{ij,h}(f,\tau)
  &=\sum_{k=0}^{n-1}a_{k,h}(f)P_{ij}(f_k,\tau).

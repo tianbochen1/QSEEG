@@ -16,7 +16,11 @@ for filename in ['simulation_final.jsonl','extra_final.jsonl','small_sample_fina
         else:unique[key]=r
 for (cid,rep),r in unique.items():
     counts[cid]=counts.get(cid,0)+1
-    for method,v in r['metrics'].items():rows.append({**r['config'],'method':method,**v})
+    for method,v in r['metrics'].items():
+        metrics=dict(v)
+        if r['config']['kind'] in ('ar','sv') and r['config']['effect']==0:
+            metrics['cover']=1-metrics['reject']
+        rows.append({**r['config'],'method':method,**metrics})
 assert len(counts)==29 and set(counts.values())=={1000},counts
 (OUT/'simulation_verified.jsonl').write_text(''.join(json.dumps(unique[k])+'\n' for k in sorted(unique)))
 df=pd.DataFrame(rows)
@@ -34,9 +38,9 @@ def mc_interval_errors(probability,n=1000):
     return np.maximum(np.stack([p-np.maximum(0,center-half),np.minimum(1,center+half)-p]),0)
 fig,axs=plt.subplots(1,2,figsize=(7,3.2),layout='constrained')
 x=np.arange(4);labels=['80 / 4','80 / 12','160 / 4','160 / 12']
-for method,marker in [('Cluster','o'),('Average','s'),('Independent','^')]:
+for method,marker,offset in [('Cluster','o',-.12),('Average','s',0),('Independent','^',.12)]:
     yy=np.array([by[(i,method)]['cover'] for i in range(4)])
-    axs[0].errorbar(x,yy,yerr=mc_interval_errors(yy),marker=marker,color=colors[method],lw=1.2,capsize=2,label=method)
+    axs[0].errorbar(x+offset,yy,yerr=mc_interval_errors(yy),marker=marker,color=colors[method],lw=1.2,capsize=2,label=method)
     axs[1].plot(x,[by[(i,method)]['width'] for i in range(4)],marker=marker,color=colors[method],lw=1.2,label=method)
 axs[0].axhline(.95,color='#333333',ls='--',lw=.8);axs[0].set_ylim(0,1.03);axs[0].set_ylabel('Simultaneous coverage')
 axs[1].set_ylabel('Mean band width')
@@ -61,7 +65,7 @@ for cid in [0,1,2,3,4,5,6,7]:
         r=by[cid,method];text+=line([str(int(r.N)),str(int(r.m)),f'{r.effect:.2f}',method]+[f'{r[k]:.3f}' for k in ['reject','cover','width','rmse']])
     if cid!=7:text+='\\addlinespace[2pt]\n'
 text+=table_end();(MAN/'table_surface.tex').write_text(text)
-text=table_start('Informative segment counts with $N=160$ and $\\delta=0$. Coverage and error are evaluated for the subject-weighted exposure coefficient. Segment-weighted regression retains a subject-level sandwich covariance but targets a different population projection.','tab:counts','lrrrr',['Method','Reject','Cover','Width','RMSE'])
+text=table_start('Informative segment counts with $N=160$ and $\\delta=0$. Coverage and error refer to the subject-weighted exposure coefficient. Independent uses the same subject-normalized weights as Cluster but treats segments as independent. Segment-weighted assigns equal weight to all segments and retains subject clustering.','tab:counts','lrrrr',['Method','Reject','Cover','Width','RMSE'])
 for method in ['Cluster','Average','Independent','Segment-weighted']:
     r=by[8,method];text+=line([method]+[f'{r[k]:.3f}' for k in ['reject','cover','width','rmse']])
 text+=table_end();(MAN/'table_counts.tex').write_text(text)
@@ -72,10 +76,10 @@ for cid in [9,102,100,101,10,11,12,105,103,104,13,14,15]:
     if cid==16:lab='SV + contamination'
     text+=line([lab,str(c['N']),str(c['n']),f"{c['effect']:.1f}"]+[f'{by[cid,m]["reject"]:.3f}' for m in ['Quantile','Median','Ordinary','Independent']])
 text+=table_end();(MAN/'table_raw.tex').write_text(text)
-text=table_start(r'Null calibration with $N=40$ subjects. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.','tab:small','llrr',['Design','Method','Reject','Cover'])
+text=table_start(r'Null calibration with $N=40$ subjects. The surface model has four segments per subject. The volatility model has six segments of length 512. In both models the exposure coefficient is zero on the tested grid, so simultaneous coverage equals one minus the rejection probability.','tab:small','llrr',['Design','Method','Reject','Cover'])
 for cid,methods in [(110,['Cluster','Average','Independent']),(111,['Quantile','Median','Ordinary','Independent'])]:
     for m in methods:
-        r=by[cid,m];text+=line(['Surface' if cid==110 else 'Volatility',m,f'{r["reject"]:.3f}',f'{r["cover"]:.3f}' if cid==110 else '--'])
+        r=by[cid,m];text+=line(['Surface' if cid==110 else 'Volatility',m,f'{r["reject"]:.3f}',f'{r["cover"]:.3f}'])
 text+=table_end();(MAN/'table_small.tex').write_text(text)
 # Gaussian multipliers with fixed standard errors.
 old=[]

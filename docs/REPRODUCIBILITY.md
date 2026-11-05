@@ -6,7 +6,7 @@ Computational materials for *Quantile spectral regression and simultaneous infer
 
 **Corresponding author:** Hanbing Zhu, zhuhbecnu@163.com.
 
-**Version:** 1.0.4
+**Version:** 1.0.5
 
 **Repository:** https://github.com/tianbochen1/QSEEG
 
@@ -63,7 +63,7 @@ python research/code/build_manuscript.py
 
 The supplied feature archives are sufficient for recalculating the EEG regressions. The Gaussian bootstrap comparison and paired calibration replace their own outputs when run. The other simulation scripts resume incomplete calculations using configuration and replication identifiers. Random-number generators are initialized in the analysis scripts so the calculations can be reproduced. Minor floating-point differences can occur across numerical-library versions and platforms.
 
-To recalculate only the EEG analyses, move `research/results/eeg/` to a separate directory, then run `analyse_eeg.py` and `report_eeg.py` using the commands above.
+The EEG fits check the retained rows and spectral features before reusing results. To recalculate only the EEG analyses, move `research/results/eeg/` to a separate directory, then run `analyse_eeg.py` and `report_eeg.py` using the commands above.
 
 ## Recreate spectral features from source recordings
 
@@ -84,6 +84,14 @@ Acquisition verifies the raw recording and annotation hashes against the source 
 
 The annotation reader uses the standard EDF date and time fields and the annotation stream. This accommodates seven source annotations with inconsistent dates in the additional recording-description field while preserving the original annotation files.
 
+For each window length and channel, a segment is eligible only when the rank indicator varies at every analysis quantile. An ineligible segment returns missing values for all corresponding spectral responses and is excluded from both quantile and ordinary regressions. Night weights and complete pairs are formed after these exclusions. Newly extracted features carry explicit eligibility indicators. If an older archive contains a quantile curve at the numerical floor across all frequencies, the original segment is needed to determine eligibility. Re-extract that record with the commands above. All retained segments in the distributed dataset satisfy the positive-variance condition.
+
+Check the boundary cases with:
+
+```bash
+python -m unittest discover -s research/tests
+```
+
 Please cite the database and the associated papers:
 
 - Mourtazaev, M. S., Kemp, B., Zwinderman, A. H., and Kamphuisen, H. A. C. (1995). Age and gender affect different characteristics of slow waves in the sleep EEG. *Sleep*, 18, 557-564. https://doi.org/10.1093/sleep/18.7.557
@@ -96,7 +104,7 @@ The primary response is a finite-window, smoothed log rank spectrum on a common 
 
 The age analysis uses adjusted between-person associations. The medication analysis uses within-person temazepam-minus-placebo contrasts. Stage-2 Fpz-Cz is primary in both studies. REM and Pz-Oz analyses are secondary. Direct quantile heterogeneity tests compare all nonmedian quantile curves with the median curve, with Holm adjustment across the four stage-channel combinations within each study.
 
-There are 29 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 24 configurations, including null calibration with 40 subjects. The archive also contains null experiments with 20 and 24 subjects and a contamination alternative without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. Four paired-design configurations assess null calibration with 22 subjects, Gaussian or standardized multivariate t5 errors, and common or age-dependent subject scales. Their covariates and residual grid covariance are based on the primary paired EEG analysis. Each uses 1,000 datasets and 399 bootstrap draws. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. The small-subject simulation runner also reports Wilson intervals and Monte Carlo standard errors in its summary.
+There are 29 main and additional simulation configurations with 1,000 datasets per configuration. The manuscript presents 24 configurations, including null calibration with 40 subjects. The archive also contains null experiments with 20 and 24 subjects and a contamination alternative without a matched null experiment. Four further configurations compare a Gaussian multiplier construction with fixed standard errors against the studentized wild bootstrap. Four paired-design configurations assess null calibration with 22 subjects, Gaussian or standardized multivariate t5 errors, and common or age-dependent subject scales. Their covariates and residual grid covariance are based on the primary paired EEG analysis. Each uses 1,000 datasets and 399 bootstrap draws. All simulation summaries use complete replication sets. Root mean squared error is calculated by averaging squared grid errors across replications before taking the square root. Monte Carlo probability error bars use Wilson intervals. For raw-series null models the coverage of the zero exposure curve is one minus the rejection rate. The small-subject simulation runner reports Wilson intervals and Monte Carlo standard errors.
 
 ## Files
 

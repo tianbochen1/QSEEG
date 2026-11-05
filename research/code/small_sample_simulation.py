@@ -94,18 +94,13 @@ def summarize(records, destination):
                 reject_wilson_upper=upper,
                 width=sum(metric["width"] for metric in metrics) / REPLICATIONS,
             )
+            covers = REPLICATIONS - rejects
+            lower, upper = wilson_interval(covers, REPLICATIONS)
+            row.update(coverage_count=covers, cover=covers / REPLICATIONS,
+                       cover_wilson_lower=lower, cover_wilson_upper=upper)
             if config["kind"] == "surface":
-                covers = sum(metric["cover"] for metric in metrics)
-                lower, upper = wilson_interval(covers, REPLICATIONS)
-                row.update(
-                    coverage_count=covers,
-                    cover=covers / REPLICATIONS,
-                    cover_wilson_lower=lower,
-                    cover_wilson_upper=upper,
-                    rmse=math.sqrt(
-                        sum(metric["rmse"] ** 2 for metric in metrics)
-                        / REPLICATIONS
-                    ),
+                row["rmse"] = math.sqrt(
+                    sum(metric["rmse"] ** 2 for metric in metrics) / REPLICATIONS
                 )
             rows.append(row)
     fields = list(dict.fromkeys(field for row in rows for field in row))

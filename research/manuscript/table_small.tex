@@ -1,6 +1,6 @@
 \begin{table}[htbp]
 \centering
-\caption{Null calibration with $N=40$ subjects. The surface model has four segments per subject, and its coverage refers to simultaneous bands for the known exposure coefficient. The stochastic-volatility model has six segments and 512 observations per segment.}\label{tab:small}
+\caption{Null calibration with $N=40$ subjects. The surface model has four segments per subject. The volatility model has six segments of length 512. In both models the exposure coefficient is zero on the tested grid, so simultaneous coverage equals one minus the rejection probability.}\label{tab:small}
 \small
 \begin{tabular}{llrr}
 \toprule
@@ -9,10 +9,10 @@ Design & Method & Reject & Cover \\
 Surface & Cluster & 0.064 & 0.936 \\
 Surface & Average & 0.057 & 0.943 \\
 Surface & Independent & 0.614 & 0.386 \\
-Volatility & Quantile & 0.050 & -- \\
-Volatility & Median & 0.054 & -- \\
-Volatility & Ordinary & 0.041 & -- \\
-Volatility & Independent & 0.120 & -- \\
+Volatility & Quantile & 0.050 & 0.950 \\
+Volatility & Median & 0.054 & 0.946 \\
+Volatility & Ordinary & 0.041 & 0.959 \\
+Volatility & Independent & 0.120 & 0.880 \\
 \bottomrule
 \end{tabular}
 \end{table}

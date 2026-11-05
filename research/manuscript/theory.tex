@@ -3,7 +3,7 @@
 The rank construction and the subject weighting give two finite-sample properties.
 
 \begin{proposition}\label{prop:invariance}
-For a fixed collection of retained segments, covariates, weights, and grid points, replacing each segment $X_{ijt}$ by $g_{ij}(X_{ijt})$, where $g_{ij}$ is strictly increasing, leaves $Y_{ij}$, $\widehat\beta$, and the bootstrap inference unchanged. If each segment of a subject is duplicated the same number of times and its weight is divided by that number, then $\widehat\beta$, $Q_i$, and $\widehat U_i$ are unchanged. The uncorrected sandwich covariance, with $c_N=1$, is also unchanged by this duplication.
+For a fixed collection of retained segments, covariates, weights, and grid points, replacing each segment $X_{ij,t}$ by $g_{ij}(X_{ij,t})$, where $g_{ij}$ is strictly increasing, leaves $Y_{ij}$, $\widehat\beta$, and the bootstrap inference unchanged. If each segment of a subject is duplicated the same number of times and its weight is divided by that number, then $\widehat\beta$, $Q_i$, and $\widehat U_i$ are unchanged. The uncorrected sandwich covariance, with $c_N=1$, is also unchanged by this duplication.
 \end{proposition}
 
 The duplication property makes explicit why repeating an existing record does not increase the independent information in the analysis. The small-sample correction in \eqref{eq:sandwich} depends on $M$ and is not included in that exact invariance statement.
@@ -81,7 +81,7 @@ Then, as $N\to\infty$,
 If $\sqrt N(b_N+v_N)\to0$, the conclusions of Theorem~\ref{thm:transfer} hold, with its positivity condition for coverage.
 \end{corollary}
 
-The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
+For equal-night weights, the weight bound in Corollary~\ref{cor:growth} holds exactly when $m_{i,N}/(K_{i,N}\min_k m_{ik,N})$, the ratio of the average to the smallest nightly segment count, is uniformly bounded. The factor $1/\underline m_N$ in \eqref{eq:growth-rate} requires the conditional covariance bound; it need not hold under arbitrary segment dependence. The mean log error is not divided by the segment count. Conditional independence of segment errors implies the covariance bound by the log-error inequalities proved in the appendix.
 
 \begin{corollary}[Joint growth]\label{cor:ratios}
 Retain the oracle, weighting, and conditional moment and covariance assumptions of Corollary~\ref{cor:growth}. Suppose the oracle contrast variances have positive limits, $b_N=O\{h_N^2+(n_Nh_N)^{-1}\}$, $v_N=O\{h_N^4+(n_Nh_N)^{-1}\}$, and $h_N=n_N^{-1/3}$. Let $N,m_N,n_N\to\infty$, with $cm_N\leq m_{i,N}\leq Cm_N$ almost surely for constants $0<c\leq C<\infty$, and

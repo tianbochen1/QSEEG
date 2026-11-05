@@ -13,8 +13,8 @@ def one(p):
     if target.exists():
         try:
             with np.load(target) as cached:
-                cached['main_q']
-            return p.stem,'cached'
+                if all(label+'_valid' in cached for label in ('main','narrow','wide','short')):
+                    return p.stem,'cached'
         except Exception:pass
     with np.load(p) as a:
         sig=a['signals'];rows=a['rows'];qual=a['quality'];meta=a['metadata']
@@ -22,6 +22,7 @@ def one(p):
     vals={}
     for label,h,l in [('main',.015,6000),('narrow',.01,6000),('wide',.02,6000),('short',.015,3000)]:
         q,o,s=spectral_features(sig[:,:,:l].reshape(n*ch,l),TAUS,FREQS,bandwidth=h)
+        vals[label+'_valid']=np.isfinite(q).all(axis=(-2,-1)).reshape(n,ch)
         vals[label+'_q']=q.reshape(n,ch,len(TAUS),len(FREQS)).astype('float32')
         vals[label+'_o']=o.reshape(n,ch,len(FREQS)).astype('float32')
         vals[label+'_s']=s.reshape(n,ch,len(FREQS)).astype('float32')

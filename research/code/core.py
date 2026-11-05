@@ -4,15 +4,18 @@ from scipy.stats import rankdata
 
 TAUS=np.arange(1,10)/10
 FREQS=np.arange(1,61)*.005
+SPECTRAL_FLOOR=1e-6
 
-def spectral_features(x, taus=TAUS, freqs=FREQS, bandwidth=.015, floor=1e-6):
+def spectral_features(x, taus=TAUS, freqs=FREQS, bandwidth=.015, floor=SPECTRAL_FLOOR):
+    """Return matched log spectra; an undefined rank grid excludes the whole window."""
     x=np.asarray(x,dtype=float)
     n=x.shape[-1]
     r=rankdata(x,axis=-1,method='average')/(n+1)
     score=(r[...,None,:]<=np.asarray(taus)[:,None]).astype(float)
     score-=score.mean(axis=-1,keepdims=True)
     den=score.var(axis=-1,keepdims=True)
-    ps=np.abs(np.fft.fft(score,axis=-1))**2/n/np.maximum(den,1e-12)
+    valid_grid=np.all(den>0,axis=(-2,-1))
+    ps=np.abs(np.fft.fft(score,axis=-1))**2/n/np.where(den>0,den,np.nan)
     ps=gaussian_filter1d(ps,bandwidth*n,axis=-1,mode='wrap',truncate=4)
     idx=np.asarray(freqs)*n;lo=np.floor(idx).astype(int);w=idx-lo
     s=ps[...,lo]*(1-w)+ps[...,lo+1]*w
@@ -24,10 +27,14 @@ def spectral_features(x, taus=TAUS, freqs=FREQS, bandwidth=.015, floor=1e-6):
     ss=pg[...,lo]*(1-w)+pg[...,lo+1]*w
     ordinary=np.log(ss+floor)
     shape=np.log(ss/np.maximum(xx.var(axis=-1,keepdims=True),1e-12)+floor)
-    return q,ordinary,shape
+    return (np.where(valid_grid[...,None,None],q,np.nan),
+            np.where(valid_grid[...,None],ordinary,np.nan),
+            np.where(valid_grid[...,None],shape,np.nan))
 
 def fit(X,Y,groups,coef=1,cluster=True,equal_subject=True,bootstrap=499,rng=None,studentized=True,weights=None):
     X=np.asarray(X,float);Y=np.asarray(Y,float)
+    if not np.isfinite(Y).all():
+        raise ValueError('Remove ineligible spectral responses before computing regression weights.')
     _,g=np.unique(groups,return_inverse=True)
     N=g.max()+1;M=len(g);p=X.shape[1]
     count=np.bincount(g)

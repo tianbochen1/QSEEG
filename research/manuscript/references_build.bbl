@@ -98,12 +98,12 @@ Kley, T., Volgushev, S., Dette, H., and Hallin, M. (2016).
 \newblock {\em Bernoulli}, 22(3):1770--1807.
 
 \bibitem[Koenker and Bassett, 1978]{Koenker1978}
-Koenker, R. and Bassett, G. (1978).
+Koenker, R. and Bassett, Jr., G. (1978).
 \newblock Regression quantiles.
 \newblock {\em Econometrica}, 46(1):33--50.
 
 \bibitem[Krafty et~al., 2011]{Krafty2011}
-Krafty, R.~T., Hall, M.~H., and Guo, W. (2011).
+Krafty, R.~T., Hall, M., and Guo, W. (2011).
 \newblock Functional mixed effects spectral analysis.
 \newblock {\em Biometrika}, 98(3):583--598.
 
@@ -227,7 +227,7 @@ Quinn, A.~J., Atkinson, L.~Z., Gohil, C., Kohl, O., Pitt, J., Zich, C., Nobre,
   A.~C., and Woolrich, M.~W. (2024).
 \newblock The {GLM}-spectrum: A multilevel framework for spectrum analysis with
   covariate and confound modelling.
-\newblock {\em Imaging Neuroscience}, 2:1--26.
+\newblock {\em Imaging Neuroscience}, 2:imag{\char45}2{\char45}00082.
 
 \bibitem[Ramsay and Silverman, 2005]{Ramsay2005}
 Ramsay, J.~O. and Silverman, B.~W. (2005).

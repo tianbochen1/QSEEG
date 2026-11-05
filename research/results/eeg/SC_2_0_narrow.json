@@ -1,0 +1,39 @@
+{
+  "input_sha256": "4bdf90d1d7ed74140dc2cc8c74d92875f48682c4003fc3d917ac0f8287cf8b96",
+  "quantile": {
+    "p": 0.0005,
+    "maxstat": 5.333046581114371,
+    "critical": 3.089481329606581,
+    "median_se": 0.011915549682529895,
+    "min_effect": -0.08271697553274271,
+    "max_effect": 0.040427886862652876,
+    "positive_points": 17,
+    "negative_points": 157,
+    "gridpoints": 540
+  },
+  "ordinary": {
+    "p": 0.0005,
+    "maxstat": 5.863238321351565,
+    "critical": 2.70944972879412,
+    "median_se": 0.03064637994010173,
+    "min_effect": -0.19044851829968704,
+    "max_effect": 0.007660348092160667,
+    "positive_points": 0,
+    "negative_points": 26,
+    "gridpoints": 60
+  },
+  "study": "SC",
+  "stage": 2,
+  "channel": 0,
+  "variant": "narrow",
+  "N": 78,
+  "segments": 3059,
+  "recordings": 153,
+  "candidate_segments": 3060,
+  "excluded_segments": 1,
+  "age_min": 25.0,
+  "age_max": 101.0,
+  "age_median": 57.0,
+  "female": 41,
+  "paired_subjects": null
+}
